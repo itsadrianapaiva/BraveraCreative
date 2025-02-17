@@ -1,6 +1,6 @@
 # Bravera Creative Website
 
-**Last Updated:** 17 February 2025
+**Date:** 17 February 2025
 
 ## Overview
 A website for a boutique digital marketing agency designed to showcase the agency's work, expertise, and streamline customer acquisition.
@@ -127,7 +127,8 @@ Once the MVP is complete and the application is running smoothly, consider addin
 - Planned the UI.
 - Wrote initial documentation.
 - Set up the file structure and installed dependencies.
-- Set up initial configuration on Prismic
+- Set up initial configuration on Prismic.
+- Started working on the Header and Footer.
 
 ### Challenges
 - [ ] .
