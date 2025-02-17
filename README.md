@@ -1,117 +1,138 @@
-# Prismic + Next.js Minimal Starter
+# Bravera Creative Website
 
-Want to quickly get started building your own project with [Prismic][prismic] and [Next.js][nextjs]? This project includes basic configurations and nothing else. The project includes one Rich Text slice, a homepage, and a dynamic page.
+**Last Updated:** 17 February 2025
 
-- **Demo**: [Open live demo][live-demo]
-- **Learn more about Prismic and Next.js**: [Prismic Next.js Documentation][prismic-docs]
+## Overview
+A website for a boutique digital marketing agency designed to showcase the agency's work, expertise, and streamline customer acquisition.
 
-&nbsp;
+---
 
-![Website screenshot](https://user-images.githubusercontent.com/31219208/228821412-fdde92b2-c13c-4287-b799-611fa96a5fd6.png)
+## Goals
+- Drive traffic from social media to the website.
+- Showcase the agency's work and expertise.
+- Provide a contact page for scheduling meetings.
 
-&nbsp;
+---
 
-## 🚀 Quick Start
+## MVP Features (Minimum Viable Product)
+- **Agency Presentation**: Introduce the agency and its values.
+- **Goals for Services**: Highlight the agency's mission and objectives.
+- **Showcase of Previous Work**: Display case studies and portfolio.
+- **Description of Services**: Detailed list of services offered.
+- **Contact Form**: Streamline customer inquiries and meetings.
+- **History and Mission of Founders**: Share the story behind the agency.
 
-To start a new project using this starter:
+---
 
-1. Visit <https://prismic.io/dashboard>.
-2. Create a new Prismic repository by selecting **Next.js**.
-3. Select the **Minimal starter**.
-4. Fill out your repository details and continue with the steps given in Prismic.
+## Layout Plan / User Flow
 
-When you're ready to start your project, run the following command:
+### Screens/Pages
+1. **Home Page**:
+   - Minimalist hero section with logo.
+   - Sections for goals, services, about, and contact form.
 
-```sh
-npm run dev
-```
+2. **About Page**:
+   - History, background, and mission of the founders.
 
-## How to use your project
+3. **Services Page**:
+   - Detailed description of services and their benefits.
 
-To edit the content of this project, go to [prismic.io/dashboard](https://prismic.io/dashboard), click on the repository for this website, and start editing.
+4. **Portfolio Page**:
+   - Case studies of previous work.
 
-### Create a page
+5. **Contact Page**:
+   - Complete contact information and a form for inquiries.
 
-To create a page, click on the green pencil icon, then select **Page**.
+---
 
-Pages are made of Slices. You can add and rearrange Slices to your pages.
+## Tasks
+### Home Page
+- [ ] Hero Section
+- [ ] Goals Section
+- [ ] Services Section
+- [ ] Portfolio Section
+- [ ] About Section
+- [ ] Contact Section
+- [ ] Footer Section
 
-Your new page will be accessible by its URL, but it won't appear on the website automatically. To let users discover it, add it to the navigation.
+---
 
-### Preview documents
+## Tech Stack
+- **Frontend**: Next.js, TypeScript, Tailwind CSS, GSAP
+- **Backend (Optional for MVP)**: 
+- **Database**: 
+- **Hosting**: GitHub Pages, GitHub Actions
+- **CMS**: Prismic
 
-If you chose this starter when you created a new repository from the Prismic Dashboard, then your repository is preconfigured with previews on localhost. To change the preview configuration or add previews to your production or staging environments, see [Preview Drafts in Next.js](https://prismic.io/docs/technologies/preview-content-nextjs) in the Prismic documentation.
+---
 
-### Customize this website
+## Wireframe
+### Home Page
+- **Hero Section**:
+  - Moving background.
+  - Logo on top, tagline in the middle.
+  - Arrow down for scrolling.
+- **Goal Section**:
+- **Services Section**:
+- **Portfolio Section**:
+- **About Section**:
+- **Contact Section**:
+- **Footer Section**:
 
-This website is preconfigured with Prismic. It has three Prismic packages installed:
+### About Page
+- History and mission.
 
-- `@prismicio/client` provides helpers for fetching content from Prismic
-- `@prismicio/react` provides React components for rendering content from Prismic
-- `@prismicio/next` provides a wrapper component to configure Prismic previews
+### Services Page
+- Detailed service descriptions.
 
-These packages are already integrated and employed in this app. Take a look at the code to see how they're used.
+### Portfolio Page
+- Case studies and previous work.
 
-### Edit the code
+### Contact Page
+- Contact information and form.
 
-There are two steps to rendering content from Prismic in your Next.js project:
+---
 
-1. Fetch content from the Prismic API using `@prismicio/client`.
-2. Template the content using components from `@prismicio/react`.
+## Development Steps
+1. **Setup the Project**:
+   - Initialize the project with Next.js and install dependencies.
 
-Here are some of the files in your project that you can edit:
+2. **Design the UI**:
+   - Create wireframes and design the layout using Tailwind CSS.
 
-- `prismicio.ts` - This file includes configuration for `@prismicio/client` and exports useful API helpers.
-- `app/layout.tsx` - This is your layout component, which includes configuration for `@prismicio/react` and `@prismicio/next`.
-- `app/page.tsx` - This is the app homepage. It queries and renders a page document with the UID (unique identifier) "home" from the Prismic API.
-- `app/[uid]/page.tsx` - This is the page component, which queries and renders a page document from your Prismic repository based on the UID.
-- `slices/*/index.tsx` - Each Slice in your project has an index.tsx file that renders the Slice component. Edit this file to customize your Slices.
+3. **Add Functionality**:
+   - Implement dynamic content fetching from Prismic.
+   - Add animations using GSAP.
 
-These are important files that you should leave as-is:
+4. **Test and Debug**:
+   - Test the website for responsiveness and functionality.
+   - Debug any issues.
 
-- `app/api/exit-preview/route.ts` - Do not edit or delete this file. This is the API endpoint to close a Prismic preview session.
-- `app/api/preview/route.ts` - Do not edit or delete this file. This is the API endpoint to launch a Prismic preview session.
-- `app/slice-simulator/page.tsx` - Do not edit or delete this file. This file simulates your Slice components in development.
-- `slices/` - This directory contains Slice components, which are generated programmatically by Slice Machine. To customize a Slice template, you can edit the Slice's index.tsx file. To add Slices, delete Slices, or edit Slice models, use Slice Machine (more info below).
+5. **Deploy the App**:
+   - Host on GitHub Pages using GitHub Actions for continuous deployment.
 
-Learn more about how to edit your components with [Fetch Data in Next.js](https://prismic.io/docs/technologies/fetch-data-nextjs) and [Template Content in Next.js](https://prismic.io/docs/technologies/template-content-nextjs).
+---
 
-Learn more about how to use [TypeScript with Prismic](https://prismic.io/docs/typescript-nextjs).
+## Future Enhancements
+Once the MVP is complete and the application is running smoothly, consider adding:
+- **Blog Section**: Share insights and updates.
+- **Customer Area**: A dedicated space for clients.
+- **Link to CMS**: Enhance content management capabilities.
 
-### Deploy to the web
-
-To put your project online, see [Deploy your Next.js App](https://prismic.io/docs/technologies/deploy-nextjs).
-
-### Edit content models with Slice Machine
-
-This project includes an application called Slice Machine, which generates models for your Custom Types and Slices. Slice Machine stores the models locally in your codebase, so you can save and version them. It also syncs your models to Prismic. To learn how to use Slice Machine, read [Model Content in Next.js](https://prismic.io/docs/technologies/model-content-nextjs).
-
-If you change or add to your Custom Types, you'll need to update your route handling to match. To learn how to do that, read [Define Paths in Next.js](https://prismic.io/docs/technologies/define-paths-nextjs).
+---
 
 ## Documentation
 
-For the official Prismic documentation, see [Prismic's guide for Next.js][prismic-docs] or the [technical references for the installed Prismic packages](https://prismic.io/docs/technologies/technical-references).
+### Day 1
+- Planned the UI.
+- Wrote initial documentation.
+- Set up the file structure and installed dependencies.
+- Set up initial configuration on Prismic
+
+### Challenges
+- [ ] .
+
+---
 
 ## License
-
-```
-Copyright 2013-2022 Prismic <contact@prismic.io> (https://prismic.io)
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
-
-[prismic]: https://prismic.io/
-[prismic-docs]: https://prismic.io/docs/technologies/nextjs
-[prismic-sign-up]: https://prismic.io/dashboard/signup
-[nextjs]: https://nextjs.org/
-[live-demo]: https://nextjs-starter-prismic-minimal.vercel.app/
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
