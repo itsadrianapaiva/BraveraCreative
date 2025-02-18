@@ -128,7 +128,7 @@ Once the MVP is complete and the application is running smoothly, consider addin
 - Wrote initial documentation.
 - Set up the file structure and installed dependencies.
 - Set up initial configuration on Prismic.
-- Started working on the Header and Footer.
+- Started working on the navigation for the Header and Footer.
 
 ### Challenges
 - [ ] .
