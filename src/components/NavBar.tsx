@@ -13,7 +13,7 @@ type NavBarProps = {
 export default function NavBar({ settings }: NavBarProps) {
   return (
     <nav aria-label="Main" className="md-:py-6 px-4 py-4 md:px-6">
-      <div className="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-white md:flex-row md:items-center">
+      <div className="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-white md:flex-row md:items-center lg:hidden">
         <Link href="/">
           <WordMark />
           <span className="sr-only">Bravera Creative Home Page</span>

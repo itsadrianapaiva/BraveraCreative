@@ -20,22 +20,12 @@
             "thumbnails": []
           }
         },
-        "heading": {
-          "type": "StructuredText",
+        "business_name": {
+          "type": "Image",
           "config": {
-            "label": "Heading",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "heading1"
-          }
-        },
-        "body": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Body",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong"
+            "label": "Business_name",
+            "constraint": {},
+            "thumbnails": []
           }
         },
         "button": {
@@ -54,6 +44,14 @@
           "config": {
             "label": "Button Label",
             "placeholder": ""
+          }
+        },
+        "arrow_down": {
+          "type": "Image",
+          "config": {
+            "label": "Arrow down",
+            "constraint": {},
+            "thumbnails": []
           }
         }
       },

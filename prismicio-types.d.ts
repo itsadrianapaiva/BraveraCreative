@@ -194,24 +194,14 @@ export interface HeroSliceDefaultPrimary {
   logo: prismic.ImageField<never>;
 
   /**
-   * Heading field in *Hero → Default → Primary*
+   * Business_name field in *Hero → Default → Primary*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.heading
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **API ID Path**: hero.default.primary.business_name
+   * - **Documentation**: https://prismic.io/docs/field#image
    */
-  heading: prismic.RichTextField;
-
-  /**
-   * Body field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
+  business_name: prismic.ImageField<never>;
 
   /**
    * Button Link field in *Hero → Default → Primary*
@@ -232,6 +222,16 @@ export interface HeroSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   button_label: prismic.KeyTextField;
+
+  /**
+   * Arrow down field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.arrow_down
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  arrow_down: prismic.ImageField<never>;
 }
 
 /**
