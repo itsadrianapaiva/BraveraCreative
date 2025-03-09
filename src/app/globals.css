@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* :root {
+  --color-primary: #ffffff;
+  --color-secondary: #243013;
+  --color-accent: #96ff00;
+  --color-background: #000000;
+  --color-foreground: #353535;
+} */
+
 .glass-container {
   position: relative;
 }

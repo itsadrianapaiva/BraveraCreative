@@ -66,10 +66,9 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       {isFilled.image(slice.primary.arrow_down) && (
         <PrismicNextImage
           field={slice.primary.arrow_down}
-          className="absolute bottom-5 left-1/2 h-16 w-16 -translate-x-1/2 opacity-20 md:h-36 md:w-36"
+          className="absolute bottom-5 left-1/2 h-16 w-16 -translate-x-1/2 opacity-20 md:h-24 md:w-24"
         />
       )}
-      
     </Bounded>
   );
 };
