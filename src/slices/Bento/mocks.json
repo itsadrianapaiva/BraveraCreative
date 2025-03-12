@@ -9,16 +9,8 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "The new\nGold Standard.",
-							"spans": [
-								{
-									"type": "em",
-									"start": 8,
-									"end": 21
-								}
-							]
-						},
-						"direction": "ltr"
+							"text": "Angry"
+						}
 					}
 				]
 			},
@@ -28,7 +20,7 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Introducing a new way of building components and layouts that leaves everything else in the dust.",
+							"text": "When our clients excel, the communities they serve benefit and we consider it the best success we could strive for.",
 							"spans": []
 						},
 						"direction": "ltr"
@@ -72,7 +64,6 @@
 							[
 								"image",
 								{
-									"__TYPE__": "ImageContent",
 									"provider": "imgix",
 									"url": "https://images.unsplash.com/photo-1517260739337-6799d239ce83?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw1fHxjaXRydXMlMjBmcnVpdHxlbnwwfHx8fDE3NDE3MjQ0MTJ8MA&ixlib=rb-4.0.3&q=85",
 									"alt": "sliced fruit on white surface",
@@ -92,6 +83,8 @@
 											"y": 0
 										}
 									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
 									"thumbnails": {}
 								}
 							]
@@ -135,7 +128,6 @@
 							[
 								"image",
 								{
-									"__TYPE__": "ImageContent",
 									"provider": "imgix",
 									"url": "https://images.unsplash.com/photo-1613260976142-3e9700b7a6a0?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxNnx8Y2l0cnVzJTIwZnJ1aXR8ZW58MHx8fHwxNzQxNzI0NDEyfDA&ixlib=rb-4.0.3&q=85",
 									"alt": "orange fruits on blue ceramic bowl",
@@ -155,12 +147,35 @@
 											"y": 0
 										}
 									},
+									"credits": null,
+									"__TYPE__": "ImageContent",
 									"thumbnails": {}
+								}
+							],
+							[
+								"wide",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": true
 								}
 							]
 						]
 					}
 				]
+			},
+			"button_label": {
+				"__TYPE__": "FieldContent",
+				"value": "himself",
+				"type": "Text"
+			},
+			"button": {
+				"key": "f1a7ae0a-63b4-485b-96a8-f77643dffc9b",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://slicemachine.dev",
+					"text": "real"
+				}
 			}
 		},
 		"items": []

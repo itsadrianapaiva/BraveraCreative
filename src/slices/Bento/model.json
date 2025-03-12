@@ -16,7 +16,7 @@
           "type": "StructuredText",
           "config": {
             "label": "Heading",
-            "placeholder": "italic for gold text",
+            "placeholder": "italic for gradient text",
             "allowTargetBlank": true,
             "single": "heading2,em"
           }
@@ -61,8 +61,35 @@
                   "constraint": {},
                   "thumbnails": []
                 }
+              },
+              "wide": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Wide",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
               }
             }
+          }
+        },
+        "button": {
+          "type": "Link",
+          "config": {
+            "label": "Button Link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "button_label": {
+          "type": "Text",
+          "config": {
+            "label": "Button Label",
+            "placeholder": ""
           }
         }
       },

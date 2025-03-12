@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
+import { PrismicNextImage } from "@prismicio/next";
 import ButtonLink from "@/components/ButtonLink";
 import Bounded from "@/components/Bounded";
-import { PrismicNextImage } from "@prismicio/next";
 
 /**
  * Props for `Hero`.
@@ -57,7 +57,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         )}
 
         {isFilled.link(slice.primary.button) && (
-          <ButtonLink field={slice.primary.button} className="">
+          <ButtonLink field={slice.primary.button}>
             {slice.primary.button_label}
           </ButtonLink>
         )}

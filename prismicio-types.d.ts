@@ -4,7 +4,7 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type PageDocumentDataSlicesSlice = HeroSlice | RichTextSlice;
+type PageDocumentDataSlicesSlice = BentoSlice | HeroSlice | RichTextSlice;
 
 /**
  * Content for Page documents
@@ -212,6 +212,17 @@ export interface BentoSliceDefaultPrimaryItemsItem {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
+
+  /**
+   * Wide field in *Bento → Default → Primary → items*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: bento.default.primary.items[].wide
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  wide: prismic.BooleanField;
 }
 
 /**
@@ -222,7 +233,7 @@ export interface BentoSliceDefaultPrimary {
    * Heading field in *Bento → Default → Primary*
    *
    * - **Field Type**: Rich Text
-   * - **Placeholder**: italic for gold text
+   * - **Placeholder**: italic for gradient text
    * - **API ID Path**: bento.default.primary.heading
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
@@ -247,6 +258,26 @@ export interface BentoSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   items: prismic.GroupField<Simplify<BentoSliceDefaultPrimaryItemsItem>>;
+
+  /**
+   * Button Link field in *Bento → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: bento.default.primary.button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Button Label field in *Bento → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: bento.default.primary.button_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_label: prismic.KeyTextField;
 }
 
 /**

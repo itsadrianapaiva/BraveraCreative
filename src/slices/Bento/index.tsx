@@ -1,8 +1,14 @@
 import { FC } from "react";
-import { asText, Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { asText, Content, isFilled } from "@prismicio/client";
+import {
+  PrismicRichText,
+  PrismicText,
+  SliceComponentProps,
+} from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
+import clsx from "clsx";
 import Bounded from "@/components/Bounded";
+import ButtonLink from "@/components/ButtonLink";
 
 /**
  * Props for `Bento`.
@@ -40,14 +46,29 @@ const Bento: FC<BentoProps> = ({ slice }) => {
       <div className="mt-16 grid max-w-4xl grid-rows-[auto_auto_auto] gap-8 md:grid-cols-3 md:gap-10">
         {slice.primary.items.map((item) => (
           <div
-            className="glass-container to gray-950 row-span-3 grid grid-rows-subgrid gap-4 rounded-lg bg-gradient-to-b from-gray-900 p-4"
+            className={clsx(
+              "glass-container to gray-950 row-span-3 grid grid-rows-subgrid gap-4 rounded-lg bg-gradient-to-b from-gray-900 p-4",
+              item.wide ? "md:col-span-2" : "md:col-span-1",
+            )}
             key={asText(item.title)}
           >
-            <PrismicRichText field={item.title} />
-            <PrismicRichText field={item.body} />
-            <PrismicNextImage field={item.image} />
+            <h3 className="text-2xl">
+              <PrismicText field={item.title} />
+            </h3>
+            <div className="text-tertiary max-w-md text-balance">
+              <PrismicRichText field={item.body} />
+            </div>
+            <PrismicNextImage field={item.image} className="max-h-36 w-auto" />
           </div>
         ))}
+      </div>
+
+      <div className="flex flex-col items-center px-6 text-center text-white mt-16">
+        {isFilled.link(slice.primary.button) && (
+          <ButtonLink field={slice.primary.button} className="">
+            {slice.primary.button_label}
+          </ButtonLink>
+        )}
       </div>
     </Bounded>
   );
