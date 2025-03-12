@@ -163,6 +163,17 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   navigation: prismic.GroupField<Simplify<SettingsDocumentDataNavigationItem>>;
+
+  /**
+   * Logo field in *Settings*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.logo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  logo: prismic.ImageField<never>;
 }
 
 /**
@@ -262,9 +273,87 @@ export type AboutSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *About → Reverse → Primary*
+ */
+export interface AboutSliceReversePrimary {
+  /**
+   * Heading field in *About → Reverse → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.reverse.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Image field in *About → Reverse → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.reverse.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Subheading field in *About → Reverse → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.reverse.primary.subheading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  subheading: prismic.TitleField;
+
+  /**
+   * Body field in *About → Reverse → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.reverse.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Button Link field in *About → Reverse → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.reverse.primary.button
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Button Label field in *About → Reverse → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.reverse.primary.button_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_label: prismic.KeyTextField;
+}
+
+/**
+ * Reverse variation for About Slice
+ *
+ * - **API ID**: `reverse`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AboutSliceReverse = prismic.SharedSliceVariation<
+  "reverse",
+  Simplify<AboutSliceReversePrimary>,
+  never
+>;
+
+/**
  * Slice variation for *About*
  */
-type AboutSliceVariation = AboutSliceDefault;
+type AboutSliceVariation = AboutSliceDefault | AboutSliceReverse;
 
 /**
  * About Shared Slice
@@ -560,8 +649,10 @@ declare module "@prismicio/client" {
       AllDocumentTypes,
       AboutSlice,
       AboutSliceDefaultPrimary,
+      AboutSliceReversePrimary,
       AboutSliceVariation,
       AboutSliceDefault,
+      AboutSliceReverse,
       BentoSlice,
       BentoSliceDefaultPrimaryItemsItem,
       BentoSliceDefaultPrimary,

@@ -8,11 +8,17 @@
     "Main": {
       "site_title": {
         "type": "Text",
-        "config": { "label": "Site title", "placeholder": "" }
+        "config": {
+          "label": "Site title",
+          "placeholder": ""
+        }
       },
       "meta_description": {
         "type": "Text",
-        "config": { "label": "Meta description", "placeholder": "" }
+        "config": {
+          "label": "Meta description",
+          "placeholder": ""
+        }
       },
       "fallback_og_image": {
         "type": "Image",
@@ -41,7 +47,10 @@
             },
             "label": {
               "type": "Text",
-              "config": { "label": "Label", "placeholder": "" }
+              "config": {
+                "label": "Label",
+                "placeholder": ""
+              }
             },
             "cta_button": {
               "type": "Boolean",
@@ -53,6 +62,14 @@
               }
             }
           }
+        }
+      },
+      "logo": {
+        "type": "Image",
+        "config": {
+          "label": "Logo",
+          "constraint": {},
+          "thumbnails": []
         }
       }
     }

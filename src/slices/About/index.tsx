@@ -21,7 +21,7 @@ const About: FC<AboutProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="relative"
     >
-      <div className="glow absolute -z-10 aspect-square w-full max-w-xl rounded-full bg-lime-400/30 blur-3xl filter" />
+      <div className="glow absolute -z-10 aspect-square w-full max-w-xl rounded-full bg-[#96ff00]/15 blur-3xl filter" />
 
       <PrismicRichText
         field={slice.primary.heading}
@@ -40,20 +40,24 @@ const About: FC<AboutProps> = ({ slice }) => {
             <PrismicRichText field={slice.primary.subheading} />
           </div>
 
-          <div className="mt-4 max-w-xl">
+          <div className="prose prose-invert mt-4 max-w-xl">
             <PrismicRichText field={slice.primary.body} />
           </div>
 
-          <ButtonLink field={slice.primary.button} className="mt-6">
-            {slice.primary.button_label || "Learn More"}
-          </ButtonLink>
+          <div className="text-center lg:text-left">
+            <ButtonLink field={slice.primary.button} className="mt-6">
+              {slice.primary.button_label || "Learn More"}
+            </ButtonLink>
+          </div>
         </div>
 
         <PrismicNextImage
           field={slice.primary.image}
           className={clsx(
-            "opacity-90 shadow-2xl lg:col-span-2 lg:pt-0 rounded-lg",
-            "lg:-order-1 lg:translate-x-[-15%]",
+            "rounded-lg opacity-90 shadow-2xl lg:col-span-2 lg:pt-0",
+            slice.variation === "reverse"
+              ? "lg:order-1 lg:translate-x-[15%]"
+              : "lg:-order-1 lg:translate-x-[-15%]",
           )}
         />
       </div>

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Content } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
-import WordMark from "@/components/WordMark";
 import ButtonLink from "@/components/ButtonLink";
 
 type NavBarProps = {
@@ -15,7 +14,6 @@ export default function NavBar({ settings }: NavBarProps) {
     <nav aria-label="Main" className="md-:py-6 px-4 py-4 md:px-6">
       <div className="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-white md:flex-row md:items-center lg:hidden">
         <Link href="/">
-          <WordMark />
           <span className="sr-only">Bravera Creative Home Page</span>
         </Link>
 
@@ -24,9 +22,7 @@ export default function NavBar({ settings }: NavBarProps) {
             if (item.cta_button) {
               return (
                 <li key={item.label}>
-                  <ButtonLink field={item.link}>
-                    {item.label}
-                  </ButtonLink>
+                  <ButtonLink field={item.link}>{item.label}</ButtonLink>
                 </li>
               );
             }
