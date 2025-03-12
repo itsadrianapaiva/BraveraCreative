@@ -22,7 +22,7 @@
 					"background": "transparent"
 				},
 				"credits": null,
-				"alt": null,
+				"alt": "image",
 				"__TYPE__": "ImageContent",
 				"thumbnails": {}
 			},
@@ -74,8 +74,8 @@
 				"value": "Meet The Team"
 			},
 			"button": {
-				"__TYPE__": "LinkContent",
 				"key": "65e4b8e1-5a1a-46dd-ba82-dcc6faf97e97",
+				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "AnyLink",
 					"kind": "any",
