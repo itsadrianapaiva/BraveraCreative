@@ -28,7 +28,7 @@ const Bento: FC<BentoProps> = ({ slice }) => {
         field={slice.primary.heading}
         components={{
           heading2: ({ children }) => (
-            <h2 className="text-balance text-center text-5xl font-medium md:text-7xl">
+            <h2 className="text-balance text-center text-5xl font-medium md:text-6xl">
               {children}
             </h2>
           ),
@@ -47,7 +47,7 @@ const Bento: FC<BentoProps> = ({ slice }) => {
         {slice.primary.items.map((item) => (
           <div
             className={clsx(
-              "glass-container to gray-950 row-span-3 grid grid-rows-subgrid gap-4 rounded-lg bg-gradient-to-b from-gray-900 p-4",
+              "glass-container row-span-3 grid grid-rows-subgrid gap-4 rounded-lg bg-gradient-to-b from-slate-500/10 to-black p-4",
               item.wide ? "md:col-span-2" : "md:col-span-1",
             )}
             key={asText(item.title)}
@@ -63,7 +63,7 @@ const Bento: FC<BentoProps> = ({ slice }) => {
         ))}
       </div>
 
-      <div className="flex flex-col items-center px-6 text-center text-white mt-16">
+      <div className="mt-16 flex flex-col items-center px-6 text-center text-white">
         {isFilled.link(slice.primary.button) && (
           <ButtonLink field={slice.primary.button} className="">
             {slice.primary.button_label}

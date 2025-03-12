@@ -20,7 +20,8 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="relative flex min-h-screen items-center justify-center !p-0"
     >
-      {/* Background Video */}
+      {/* Background video with mask for gradient transition to a new section*/}
+      <div className='absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)]'>
       <div className="absolute inset-0 z-0 h-full w-full">
         <video
           autoPlay
@@ -42,6 +43,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           <source src="/video/backgroundhero.ogv" type="video/ogg" />
           Your browser does not support the video tag.
         </video>
+      </div>
       </div>
       <PrismicNextImage
         field={slice.primary.logo}
