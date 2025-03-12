@@ -58,14 +58,17 @@ const Bento: FC<BentoProps> = ({ slice }) => {
             <div className="text-tertiary max-w-md text-balance">
               <PrismicRichText field={item.body} />
             </div>
-            <PrismicNextImage field={item.image} className="max-h-36 w-auto" />
+            <PrismicNextImage
+              field={item.image}
+              className="max-h-36 w-auto rounded-lg"
+            />
           </div>
         ))}
       </div>
 
       <div className="mt-16 flex flex-col items-center px-6 text-center text-white">
         {isFilled.link(slice.primary.button) && (
-          <ButtonLink field={slice.primary.button} className="">
+          <ButtonLink field={slice.primary.button}>
             {slice.primary.button_label}
           </ButtonLink>
         )}
