@@ -11,14 +11,30 @@
       "version": "sktwi1xtmkfgx8626",
       "description": "RichText",
       "primary": {
-        "content": {
+        "company": {
           "type": "StructuredText",
           "config": {
-            "label": "Content",
-            "placeholder": "Lorem ipsum...",
+            "label": "Company",
+            "placeholder": "",
             "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,strong,em,hyperlink,embed,list-item",
-            "labels": ["codespan"]
+            "single": "heading1"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph"
+          }
+        },
+        "logo": {
+          "type": "Image",
+          "config": {
+            "label": "Logo",
+            "constraint": {},
+            "thumbnails": []
           }
         }
       },
