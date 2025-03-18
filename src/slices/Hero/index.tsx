@@ -22,8 +22,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       className="relative flex min-h-screen items-center justify-center !p-0"
     >
       {/* Reusable Background Video */}
-      <BackgroundVideo height="h-full" opacity="opacity-40" />
-      
+      <BackgroundVideo height="h-full" opacity="opacity-90" />
 
       <PrismicNextImage
         field={slice.primary.logo}
