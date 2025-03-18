@@ -4,6 +4,7 @@ import { SliceComponentProps } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
 import ButtonLink from "@/components/ButtonLink";
 import Bounded from "@/components/Bounded";
+import BackgroundVideo from "@/components/BackgroundVideo";
 
 /**
  * Props for `Hero`.
@@ -20,31 +21,10 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="relative flex min-h-screen items-center justify-center !p-0"
     >
-      {/* Background video with mask for gradient transition to a new section*/}
-      <div className='absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)]'>
-      <div className="absolute inset-0 z-0 h-full w-full">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="h-full w-full object-cover"
-        >
-          {/*  Multiple Video Formats for Compatibility */}
-          <source
-            src="/video/backgroundhero.mp4"
-            type="video/mp4; codecs=hvc1"
-          />
-          <source
-            src="/video/backgroundhero.mp4"
-            type="video/mp4; codecs=avc1"
-          />
-          <source src="/video/backgroundhero.webm" type="video/webm" />
-          <source src="/video/backgroundhero.ogv" type="video/ogg" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      </div>
+      {/* Reusable Background Video */}
+      <BackgroundVideo height="h-full" opacity="opacity-40" />
+      
+
       <PrismicNextImage
         field={slice.primary.logo}
         className="absolute left-1/2 top-[15%] -translate-x-1/2 -translate-y-1/2 opacity-70"

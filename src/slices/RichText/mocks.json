@@ -3,50 +3,16 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
-			"company": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading1",
-						"content": {
-							"text": "Principal"
-						}
-					}
-				]
-			},
-			"description": {
+			"content": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Qui elit anim sit."
+							"text": "Proident id adipisicing labore consectetur eiusmod cupidatat officia do. Voluptate fugiat deserunt dolore aute ex veniam aute laboris minim consequat proident."
 						}
 					}
 				]
-			},
-			"logo": {
-				"origin": {
-					"id": "main",
-					"url": "https://images.unsplash.com/photo-1593642633279-1796119d5482",
-					"width": 4016,
-					"height": 6016
-				},
-				"url": "https://images.unsplash.com/photo-1593642633279-1796119d5482",
-				"width": 4016,
-				"height": 6016,
-				"edit": {
-					"zoom": 1,
-					"crop": {
-						"x": 0,
-						"y": 0
-					},
-					"background": "transparent"
-				},
-				"credits": null,
-				"alt": null,
-				"__TYPE__": "ImageContent",
-				"thumbnails": {}
 			}
 		},
 		"items": [

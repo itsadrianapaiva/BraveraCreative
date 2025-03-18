@@ -761,34 +761,14 @@ export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
  */
 export interface RichTextSliceDefaultPrimary {
   /**
-   * Company field in *RichText → Default → Primary*
-   *
-   * - **Field Type**: Title
-   * - **Placeholder**: *None*
-   * - **API ID Path**: rich_text.default.primary.company
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  company: prismic.TitleField;
-
-  /**
-   * Description field in *RichText → Default → Primary*
+   * Content field in *RichText → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: rich_text.default.primary.description
+   * - **API ID Path**: rich_text.default.primary.content
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  description: prismic.RichTextField;
-
-  /**
-   * Logo field in *RichText → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: rich_text.default.primary.logo
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  logo: prismic.ImageField<never>;
+  content: prismic.RichTextField;
 }
 
 /**

@@ -3,28 +3,6 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
-			"heading": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading2",
-						"content": {
-							"text": "Fought"
-						}
-					}
-				]
-			},
-			"body": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Sint veniam quis proident incididunt minim ut et laboris occaecat esse culpa amet magna duis."
-						}
-					}
-				]
-			},
 			"items": {
 				"__TYPE__": "GroupContentType",
 				"value": [
@@ -43,6 +21,28 @@
 								}
 							]
 						]
+					}
+				]
+			},
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Quiet"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Labore in consectetur do labore irure minim officia consequat nostrud do enim nulla. Dolor aute incididunt ad deserunt occaecat pariatur labore labore."
+						}
 					}
 				]
 			}
