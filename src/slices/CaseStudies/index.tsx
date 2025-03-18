@@ -71,7 +71,7 @@ const CaseStudies: FC<CaseStudiesProps> = ({ slice }) => {
       </h2>
 
       {/* Body */}
-      <div className="mx-auto mt-6 max-w-md text-balance text-center text-slate-300">
+      <div className="mx-auto mt-6 max-w-md text-balance text-center text-tertiary">
         <PrismicRichText field={slice.primary.body} />
       </div>
 
@@ -102,7 +102,7 @@ const CaseStudies: FC<CaseStudiesProps> = ({ slice }) => {
 
             {/* Image */}
             <PrismicNextImage
-              field={caseStudy.data.logo} // Ensure this field exists in your Prismic custom type
+              field={caseStudy.data.logo}
               quality={100}
               sizes="(max-width: 768px) 100vw, 50vw"
               className={clsx(
