@@ -1,12 +1,10 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { asImageSrc } from "@prismicio/client";
-import { PrismicText, SliceZone } from "@prismicio/react";
-
+import { SliceZone } from "@prismicio/react";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import Bounded from "@/components/Bounded";
-import BackgroundVideo from "@/components/BackgroundVideo";
 
 type Params = { uid: string };
 
@@ -17,18 +15,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <Bounded as="article">
-      <BackgroundVideo height="h-1/3" opacity="opacity-30" />
-
-      {/* Page Content */}
-      <div className="relative grid place-items-center text-center mt-20">
-        <h1 className="relative z-10 text-6xl font-medium text-tertiary">
-          <PrismicText field={page.data.title} />
-          <p className="text-lg text-accent">Who we are</p>
-        </h1>
-        <p className="relative z-10 mb-4 mt-8 max-w-xl text-lg text-tertiary">
-          <PrismicText field={page.data.description} />
-        </p>
-      </div>
       <div className="mx-auto">
         <SliceZone slices={page.data.slices} components={components} />
       </div>

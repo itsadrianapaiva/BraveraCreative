@@ -18,10 +18,10 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <Bounded as="article">
-     <BackgroundVideo height="h-1/3" opacity="opacity-30" />
+      <BackgroundVideo height="h-1/3" opacity="opacity-30" />
 
       {/* Page Content */}
-      <div className="relative grid place-items-center text-center mt-20">
+      <div className="relative mt-20 grid place-items-center text-center">
         <h1 className="relative z-10 text-6xl font-medium text-tertiary">
           <PrismicText field={page.data.company} />
           <p className="text-lg text-accent">Case Study</p>
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           quality={100}
         />
       </div>
-      <div className="mx-auto">
+      <div className="mx-auto -mt-20">
         <SliceZone slices={page.data.slices} components={components} />
       </div>
     </Bounded>

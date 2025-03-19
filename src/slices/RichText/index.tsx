@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import { isFilled, type Content } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import {
   PrismicRichText,
   type SliceComponentProps,
@@ -8,6 +8,7 @@ import {
 } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import ButtonLink from "@/components/ButtonLink";
+import BackgroundVideo from "@/components/BackgroundVideo";
 
 const components: JSXMapSerializer = {
   hyperlink: ({ node, children }) => {
@@ -31,7 +32,25 @@ type RichTextProps = SliceComponentProps<Content.RichTextSlice>;
 const RichText: FC<RichTextProps> = ({ slice }) => {
   return (
     <Bounded>
-      <div className="prose prose-lg prose-slate prose-invert">
+      <BackgroundVideo height="h-1/3" opacity="opacity-30" />
+
+      {/* Page Content */}
+      <div className="relative mt-20 grid place-items-center text-center">
+        <div className="relative z-10 text-6xl font-medium text-tertiary">
+          <PrismicRichText field={slice.primary.heading} />
+          <p className="text-lg text-accent">{slice.primary.subtitle}</p>
+        </div>
+        <div className="relative z-10 mb-4 mt-8 max-w-xl text-lg text-tertiary">
+          <PrismicRichText field={slice.primary.description} />
+        </div>
+        <PrismicNextImage
+          field={slice.primary.image}
+          quality={100}
+          className="rounded-lg"
+        />
+      </div>
+
+      <div className="prose prose-lg prose-slate prose-invert mt-8">
         <PrismicRichText
           field={slice.primary.content}
           components={components}
