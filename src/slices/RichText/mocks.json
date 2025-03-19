@@ -13,6 +13,42 @@
 						}
 					}
 				]
+			},
+			"button_link": {
+				"key": "42093e58-fb1a-49a8-9f17-7dc0e2dac9d5",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "paint"
+				}
+			},
+			"button_label": {
+				"__TYPE__": "FieldContent",
+				"value": "bean",
+				"type": "Text"
+			},
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Block"
+						}
+					}
+				]
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Non incididunt sunt nostrud excepteur eu reprehenderit duis adipisicing aliqua tempor consequat sunt fugiat. Et ad dolore qui consectetur."
+						}
+					}
+				]
 			}
 		},
 		"items": [

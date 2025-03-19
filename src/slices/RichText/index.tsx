@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { type Content } from "@prismicio/client";
+import { isFilled, type Content } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import {
   PrismicRichText,
@@ -7,6 +7,7 @@ import {
   type JSXMapSerializer,
 } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import ButtonLink from "@/components/ButtonLink";
 
 const components: JSXMapSerializer = {
   hyperlink: ({ node, children }) => {
@@ -35,6 +36,14 @@ const RichText: FC<RichTextProps> = ({ slice }) => {
           field={slice.primary.content}
           components={components}
         />
+      </div>
+
+      <div className="mt-16 flex flex-col items-center px-6 text-center text-white">
+        {isFilled.link(slice.primary.button_link) && (
+          <ButtonLink field={slice.primary.button_link}>
+            {slice.primary.button_label}
+          </ButtonLink>
+        )}
       </div>
     </Bounded>
   );
