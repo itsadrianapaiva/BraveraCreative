@@ -71,7 +71,7 @@ const CaseStudies: FC<CaseStudiesProps> = ({ slice }) => {
       </h2>
 
       {/* Body */}
-      <div className="mx-auto mt-6 max-w-md text-balance text-center text-slate-300">
+      <div className="mx-auto mt-6 max-w-md text-balance text-center text-tertiary">
         <PrismicRichText field={slice.primary.body} />
       </div>
 
