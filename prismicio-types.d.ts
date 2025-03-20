@@ -102,24 +102,6 @@ export type CaseStudyDocument<Lang extends string = string> =
     Lang
   >;
 
-interface ContactformDocumentData {}
-
-/**
- * ContactForm document from Prismic
- *
- * - **API ID**: `contactform`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ContactformDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<ContactformDocumentData>,
-    "contactform",
-    Lang
-  >;
-
 type PageDocumentDataSlicesSlice =
   | ContactSlice
   | IntegrationsSlice
@@ -324,7 +306,6 @@ export type SettingsDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | CaseStudyDocument
-  | ContactformDocument
   | PageDocument
   | SettingsDocument;
 
@@ -721,14 +702,14 @@ export interface ContactSliceDefaultPrimary {
   heading: prismic.TitleField;
 
   /**
-   * Description field in *ContactForm → Default → Primary*
+   * Body field in *ContactForm → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: contact.default.primary.description
+   * - **API ID Path**: contact.default.primary.body
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  description: prismic.RichTextField;
+  body: prismic.RichTextField;
 }
 
 /**
@@ -1058,8 +1039,6 @@ declare module "@prismicio/client" {
       CaseStudyDocument,
       CaseStudyDocumentData,
       CaseStudyDocumentDataSlicesSlice,
-      ContactformDocument,
-      ContactformDocumentData,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,

@@ -1,15 +1,44 @@
+"use client";
+
+import { FC } from "react";
+import { Content } from "@prismicio/client";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { usePathname } from "next/navigation";
 import React from "react";
 import Bounded from "@/components/Bounded";
-import ContactForm from "@/components/ContactForm"; 
 import Image from "next/image";
 import videocall from "./videocall.png";
+import Form from "@/components/Form";
 
+/**
+ * Props for `Contact`.
+ */
+export type ContactProps = SliceComponentProps<Content.ContactSlice>;
 
-const ContactFormSlice: React.FC = () => {
-  // Renamed to avoid conflict
+/**
+ * Component for "Contact" Slices.
+ */
+const Contact: FC<ContactProps> = ({ slice }) => {
+  const pathname = usePathname();
+  const isContactPage = pathname?.includes("/contact");
+
   return (
-    <Bounded className="-mt-24 lg:-mt-36">
-      <div className="relative m-10 flex flex-col items-start space-y-12 md:space-x-6 md:space-y-0 lg:flex-row lg:space-x-10">
+    <Bounded
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+      className={`${isContactPage ? "-mt-56" : "mt-20"}`} // Adjust margin top based on the page
+    >
+      {/* Heading */}
+      <div className="max-w-2xl text-balance text-center text-5xl font-medium md:text-6xl">
+        <PrismicRichText field={slice.primary.heading} />
+      </div>
+
+      {/* Body */}
+      <div className="mx-auto mb-24 mt-6 max-w-md text-balance text-center text-tertiary">
+        <PrismicRichText field={slice.primary.body} />
+      </div>
+
+      <div className="relative flex flex-col items-start space-y-12 md:space-x-6 md:space-y-0 lg:flex-row lg:space-x-10">
         {/* Scheduling Container */}
         <div className="glass-container flex flex-col items-start justify-center space-y-6 rounded-xl bg-gradient-to-b from-slate-500/10 to-black p-8 md:flex-row md:gap-8 lg:w-1/3 lg:flex-col-reverse">
           <div className="space-y-4 md:space-y-6">
@@ -43,11 +72,11 @@ const ContactFormSlice: React.FC = () => {
 
         {/* Contact Form */}
         <div className="flex-1 lg:w-2/3">
-          <ContactForm />
+          <Form />
         </div>
       </div>
     </Bounded>
   );
 };
 
-export default ContactFormSlice;
+export default Contact;

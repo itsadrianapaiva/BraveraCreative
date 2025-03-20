@@ -76,7 +76,7 @@ const CaseStudies: FC<CaseStudiesProps> = ({ slice }) => {
       </div>
 
       {/* Case Studies Grid */}
-      <div className="mt-20 grid gap-16">
+      <div className="my-auto mt-20 grid gap-16">
         {caseStudies.map((caseStudy, index) => (
           <div
             key={caseStudy.id}

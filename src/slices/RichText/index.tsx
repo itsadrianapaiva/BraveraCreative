@@ -35,19 +35,21 @@ const RichText: FC<RichTextProps> = ({ slice }) => {
       <BackgroundVideo height="h-1/3" opacity="opacity-30" />
 
       {/* Page Content */}
-      <div className="relative mt-20 grid place-items-center text-center">
+      <div className="relative grid place-items-center pt-24 text-center lg:pt-32">
         <div className="relative z-10 text-6xl font-medium text-tertiary">
           <PrismicRichText field={slice.primary.heading} />
-          <p className="text-lg text-accent">{slice.primary.subtitle}</p>
+          <p className="pt-2 text-lg text-accent">{slice.primary.subtitle}</p>
         </div>
-        <div className="relative z-10 mb-4 mt-8 max-w-xl text-lg text-tertiary">
+        <div className="relative z-10 mb-8 mt-8 max-w-xl text-lg text-tertiary">
           <PrismicRichText field={slice.primary.description} />
         </div>
-        <PrismicNextImage
-          field={slice.primary.image}
-          quality={100}
-          className="rounded-lg"
-        />
+        {isFilled.image(slice.primary.image) && (
+          <PrismicNextImage
+            field={slice.primary.image}
+            quality={100}
+            className="rounded-lg"
+          />
+        )}
       </div>
 
       <div className="prose prose-lg prose-slate prose-invert mt-8">
