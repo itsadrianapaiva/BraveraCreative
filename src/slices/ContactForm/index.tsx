@@ -26,7 +26,7 @@ const Contact: FC<ContactProps> = ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={`${isContactPage ? "-mt-56" : "mt-20"}`} // Adjust margin top based on the page
+      className={`${isContactPage ? "-mt-56" : "mt-12"}`} // Adjust margin top based on the page
     >
       {/* Heading */}
       <div className="max-w-2xl text-balance text-center text-5xl font-medium md:text-6xl">
