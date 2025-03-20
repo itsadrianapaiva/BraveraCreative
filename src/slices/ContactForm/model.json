@@ -29,21 +29,6 @@
             "allowTargetBlank": true,
             "multi": "paragraph,strong,em"
           }
-        },
-        "background_image": {
-          "type": "Image",
-          "config": {
-            "label": "Background Image",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
-        "button_label": {
-          "type": "Text",
-          "config": {
-            "label": "Button Label",
-            "placeholder": ""
-          }
         }
       },
       "items": {}

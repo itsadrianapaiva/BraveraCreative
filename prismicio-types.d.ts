@@ -729,26 +729,6 @@ export interface ContactSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   description: prismic.RichTextField;
-
-  /**
-   * Background Image field in *ContactForm → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.default.primary.background_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  background_image: prismic.ImageField<never>;
-
-  /**
-   * Button Label field in *ContactForm → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.default.primary.button_label
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  button_label: prismic.KeyTextField;
 }
 
 /**
