@@ -47,20 +47,21 @@ const Integrations: FC<IntegrationsProps> = ({ slice }) => {
         </div>
 
         {/* Logos */}
-        <div className="relative mt-20 flex flex-wrap items-center justify-center gap-10 md:flex-nowrap">
-          {/* Left Line */}
-          <div className="absolute left-[calc(25%-30px)] right-1/2 top-1/2 z-0 h-0.5 bg-gradient-to-r from-transparent via-gray-200/60 to-transparent" />
+        <div className="relative mt-20 flex flex-wrap items-center justify-center gap-10 md:flex-nowrap md:space-x-10">
+          {/* Horizontal Line for MD+ screens */}
+          <div className="absolute left-[calc(15%-30px)] right-[55%] top-1/2 z-0 hidden h-0.5 bg-gradient-to-r from-transparent via-gray-200/60 to-transparent md:block" />
+          <div className="absolute left-[55%] right-[calc(10%-30px)] top-1/2 z-0 hidden h-0.5 bg-gradient-to-r from-transparent via-gray-200/60 to-transparent md:block" />
 
-          {/* Right Line */}
-          <div className="absolute left-1/2 right-[calc(25%-30px)] top-1/2 z-0 h-0.5 bg-gradient-to-r from-transparent via-gray-200/60 to-transparent" />
+          {/* Vertical Lines for SM screens */}
+          <div className="absolute -top-10 bottom-[70%] left-1/2 z-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-transparent via-gray-200/60 to-transparent md:hidden" />
+          <div className="absolute -bottom-2 left-1/2 top-[60%] z-0 w-0.5 -translate-x-1/2 bg-gradient-to-t from-transparent via-gray-200/60 to-transparent md:hidden" />
 
-          {/* First two logos with more solid pulsing icons */}
+          {/* First two logos */}
           {slice.primary.items.slice(0, 2).map((item, index) => (
             <div
               key={index}
               className="relative z-10 flex items-center justify-center"
             >
-              {/* More solid Pulsing Square Behind */}
               <div className="absolute z-0 h-36 w-36 animate-pulse rounded-lg border-2 border-gray-400 bg-gray-200/60 shadow-2xl"></div>
               <PrismicNextImage
                 field={item.logo}
@@ -69,9 +70,8 @@ const Integrations: FC<IntegrationsProps> = ({ slice }) => {
             </div>
           ))}
 
-          {/* Circle Border + Bravera Logo */}
+          {/* Center Bravera Logo */}
           <div className="relative z-10 mx-6 flex items-center justify-center">
-            {/* Full Pulsing Circle Behind */}
             <div className="absolute z-0 h-[188px] w-[183px] animate-pulse rounded-full border-2 border-gray-400 bg-gray-200/60 shadow-2xl"></div>
             <Image
               src={braveralogo}
@@ -82,13 +82,12 @@ const Integrations: FC<IntegrationsProps> = ({ slice }) => {
             />
           </div>
 
-          {/* Last two logos with more solid pulsing icons */}
+          {/* Last two logos */}
           {slice.primary.items.slice(2, 4).map((item, index) => (
             <div
               key={index + 2}
               className="relative z-10 flex items-center justify-center"
             >
-              {/* More solid Pulsing Square Behind */}
               <div className="absolute z-0 h-36 w-36 animate-pulse rounded-lg border-2 border-gray-400 bg-gray-200/60 shadow-2xl"></div>
               <PrismicNextImage
                 field={item.logo}
