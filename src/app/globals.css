@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --color-primary: #ffffff;
   --color-secondary: #243013;
@@ -19,6 +18,23 @@
 .glass-container::before {
   @apply absolute -inset-[10px] -z-10 rounded-xl border border-slate-100/20 bg-slate-100/10 backdrop-blur-md;
   content: "";
+}
+
+.mask-gradient {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 20%,
+    black 80%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 20%,
+    black 80%,
+    transparent
+  );
 }
 
 .signal-line {

@@ -30,7 +30,7 @@ const Integrations: FC<IntegrationsProps> = ({ slice }) => {
     >
       <Image
         src={background}
-        alt=""
+        alt="background"
         fill
         className="object-cover"
         quality={90}
@@ -62,10 +62,10 @@ const Integrations: FC<IntegrationsProps> = ({ slice }) => {
               key={index}
               className="relative z-10 flex items-center justify-center"
             >
-              <div className="absolute z-0 h-36 w-36 animate-pulse rounded-lg border-2 border-gray-400 bg-gray-200/60 shadow-2xl"></div>
+              <div className="absolute z-0 h-32 w-32 animate-pulse rounded-full border-2 border-gray-400 bg-gray-200/60 shadow-2xl"></div>
               <PrismicNextImage
                 field={item.logo}
-                className="relative z-10 h-auto w-32"
+                className="relative z-10 h-auto w-28 mix-blend-multiply"
               />
             </div>
           ))}
@@ -88,10 +88,10 @@ const Integrations: FC<IntegrationsProps> = ({ slice }) => {
               key={index + 2}
               className="relative z-10 flex items-center justify-center"
             >
-              <div className="absolute z-0 h-36 w-36 animate-pulse rounded-lg border-2 border-gray-400 bg-gray-200/60 shadow-2xl"></div>
+              <div className="absolute z-0 h-32 w-32 animate-pulse rounded-full border-2 border-gray-400 bg-gray-200/60 shadow-2xl"></div>
               <PrismicNextImage
                 field={item.logo}
-                className="relative z-10 h-auto w-32"
+                className="relative z-10 h-auto w-28 mix-blend-multiply"
               />
             </div>
           ))}

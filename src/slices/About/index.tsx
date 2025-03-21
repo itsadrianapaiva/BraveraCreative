@@ -35,7 +35,7 @@ const About: FC<AboutProps> = ({ slice }) => {
       />
 
       <div className="mt-16 grid items-center gap-8 rounded-xl border border-slate-100/20 bg-gradient-to-b from-slate-500/10 to-black px-8 py-8 backdrop-blur-sm md:grid-cols-2 lg:grid-cols-3 lg:py-12">
-        <div className="">
+        <div>
           <div className="mt-6 text-2xl font-normal">
             <PrismicRichText field={slice.primary.subheading} />
           </div>
@@ -44,7 +44,7 @@ const About: FC<AboutProps> = ({ slice }) => {
             <PrismicRichText field={slice.primary.body} />
           </div>
 
-          <div className="text-center lg:text-left">
+          <div className="text-center sm:text-left">
             <ButtonLink field={slice.primary.button} className="mt-6">
               {slice.primary.button_label || "Learn More"}
             </ButtonLink>
