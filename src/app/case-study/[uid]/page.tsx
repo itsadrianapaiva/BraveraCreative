@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       <BackgroundVideo height="h-1/3" opacity="opacity-30" />
 
       {/* Page Content */}
-      <div className="relative mt-20 grid place-items-center text-center">
+      <div className="relative mt-24 md:mt-36 grid place-items-center text-center">
         <h1 className="relative z-10 text-6xl font-medium text-tertiary">
           <PrismicText field={page.data.company} />
           <p className="text-lg text-accent">Case Study</p>

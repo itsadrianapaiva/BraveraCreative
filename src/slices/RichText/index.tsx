@@ -31,8 +31,8 @@ type RichTextProps = SliceComponentProps<Content.RichTextSlice>;
  */
 const RichText: FC<RichTextProps> = ({ slice }) => {
   return (
-    <Bounded>
-      <BackgroundVideo height="h-1/3" opacity="opacity-30" />
+    <Bounded className="">
+      <BackgroundVideo height="h-2/5" opacity="opacity-30" />
 
       {/* Page Content */}
       <div className="relative grid place-items-center pt-24 text-center lg:pt-32">

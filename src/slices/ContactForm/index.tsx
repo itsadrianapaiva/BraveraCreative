@@ -26,7 +26,7 @@ const Contact: FC<ContactProps> = ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={`${isContactPage ? "-mt-56" : "mt-12"}`} // Adjust margin top based on the page
+      className={`${isContactPage ? "-mt-64" : "mt-12"}`} // Adjust margin top based on the page
     >
       {/* Heading */}
       <div className="max-w-2xl text-balance text-center text-5xl font-medium md:text-6xl">
@@ -38,7 +38,7 @@ const Contact: FC<ContactProps> = ({ slice }) => {
         <PrismicRichText field={slice.primary.body} />
       </div>
 
-      <div className="relative flex flex-col items-start space-y-12 md:space-x-6 md:space-y-0 lg:flex-row lg:space-x-10">
+      <div className="relative flex flex-col items-start space-y-12 px-2 md:space-x-6 md:space-y-0 lg:flex-row lg:space-x-10">
         {/* Scheduling Container */}
         <div className="glass-container flex flex-col items-start justify-center space-y-6 rounded-xl bg-gradient-to-b from-slate-500/10 to-black p-8 md:flex-row md:gap-8 lg:w-1/3 lg:flex-col-reverse">
           <div className="space-y-4 md:space-y-6">

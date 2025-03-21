@@ -33,17 +33,17 @@ const Bento: FC<BentoProps> = ({ slice }) => {
             </h2>
           ),
           em: ({ children }) => (
-            <em className="from-primary to-accent bg-gradient-to-b bg-clip-text not-italic text-transparent">
+            <em className="bg-gradient-to-b from-primary to-accent bg-clip-text not-italic text-transparent">
               {children}
             </em>
           ),
         }}
       />
-      <div className="text-tertiary mx-auto mt-6 max-w-md text-balance text-center">
+      <div className="mx-auto mt-6 max-w-md text-balance text-center text-tertiary">
         <PrismicRichText field={slice.primary.body} />
       </div>
 
-      <div className="mt-16 grid max-w-4xl grid-rows-[auto_auto_auto] gap-8 md:grid-cols-3 md:gap-10">
+      <div className="mt-16 grid max-w-4xl grid-rows-[auto_auto_auto] gap-8 px-2 md:grid-cols-3 md:gap-10">
         {slice.primary.items.map((item) => (
           <div
             className={clsx(
@@ -55,7 +55,7 @@ const Bento: FC<BentoProps> = ({ slice }) => {
             <h3 className="text-2xl">
               <PrismicText field={item.title} />
             </h3>
-            <div className="text-tertiary max-w-md text-balance">
+            <div className="max-w-md text-balance text-tertiary">
               <PrismicRichText field={item.body} />
             </div>
             <PrismicNextImage

@@ -57,7 +57,11 @@ const CaseStudies: FC<CaseStudiesProps> = ({ slice }) => {
   }, [slice.primary.items]);
 
   if (isLoading) {
-    return <p>Loading case studies...</p>;
+    return (
+      <div className="flex h-full items-center justify-center">
+        <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-gray-400"></div>
+      </div>
+    );
   }
 
   return (
