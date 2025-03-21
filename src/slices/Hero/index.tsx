@@ -39,7 +39,11 @@ const Hero: FC<HeroProps> = ({ slice }) => {
 
         {isFilled.link(slice.primary.button) && (
           <ButtonLink field={slice.primary.button}>
-            {slice.primary.button_label}
+            {/* Show shorter text on mobile, full text on desktop */}
+            <span className="inline md:hidden">Get to Know</span>
+            <span className="hidden md:inline">
+              {slice.primary.button_label}
+            </span>
           </ButtonLink>
         )}
       </div>

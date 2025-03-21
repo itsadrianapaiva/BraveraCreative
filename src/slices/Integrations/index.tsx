@@ -61,7 +61,7 @@ const Integrations: FC<IntegrationsProps> = ({ slice }) => {
               className="relative z-10 flex items-center justify-center"
             >
               {/* More solid Pulsing Square Behind */}
-              <div className="absolute z-0 h-36 w-36 animate-pulse rounded-lg border border-gray-300 bg-gray-200/60"></div>
+              <div className="absolute z-0 h-36 w-36 animate-pulse rounded-lg border-2 border-gray-400 bg-gray-200/60 shadow-2xl"></div>
               <PrismicNextImage
                 field={item.logo}
                 className="relative z-10 h-auto w-32"
@@ -72,12 +72,12 @@ const Integrations: FC<IntegrationsProps> = ({ slice }) => {
           {/* Circle Border + Bravera Logo */}
           <div className="relative z-10 mx-6 flex items-center justify-center">
             {/* Full Pulsing Circle Behind */}
-            <div className="absolute z-0 h-[188px] w-[183px] animate-pulse rounded-full border border-gray-300 bg-gray-200/60"></div>
+            <div className="absolute z-0 h-[188px] w-[183px] animate-pulse rounded-full border-2 border-gray-400 bg-gray-200/60 shadow-2xl"></div>
             <Image
               src={braveralogo}
               alt="Bravera Logo"
-              width={400}
-              height={400}
+              width={380}
+              height={380}
               className="relative z-10"
             />
           </div>
@@ -89,7 +89,7 @@ const Integrations: FC<IntegrationsProps> = ({ slice }) => {
               className="relative z-10 flex items-center justify-center"
             >
               {/* More solid Pulsing Square Behind */}
-              <div className="absolute z-0 h-36 w-36 animate-pulse rounded-lg border border-gray-300 bg-gray-200/60"></div>
+              <div className="absolute z-0 h-36 w-36 animate-pulse rounded-lg border-2 border-gray-400 bg-gray-200/60 shadow-2xl"></div>
               <PrismicNextImage
                 field={item.logo}
                 className="relative z-10 h-auto w-32"
