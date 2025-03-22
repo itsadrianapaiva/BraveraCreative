@@ -19,7 +19,7 @@ const CallToAction: FC<CallToActionProps> = ({ slice }) => {
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="relative overflow-hidden px-6 py-32 text-center font-medium md:py-40"
+      className="relative overflow-visible px-6 py-32 text-center font-medium md:py-40"
     >
       <div className="glow absolute -z-10 aspect-square w-full max-w-sm rounded-full bg-[#96ff00]/50 blur-[160px] filter" />
 
