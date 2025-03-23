@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TiMail, TiPhoneOutline, TiTime } from "react-icons/ti";
 
@@ -12,10 +13,27 @@ type FormValues = {
 };
 
 const Form: React.FC = () => {
-  const { register, handleSubmit } = useForm<FormValues>();
+  const { register, handleSubmit, reset } = useForm<FormValues>();
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      //Sending form data to the /api/sendEmail endpoint
+      await axios.post("/api/sendEmail", data);
+      setSuccess("Message sent successfully! We'll be in touch soon.");
+      reset();
+    } catch (error) {
+      console.error("Error sending message:", error);
+      setError("Failed to send the message. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -92,9 +110,14 @@ const Form: React.FC = () => {
         <button
           type="submit"
           className="mt-4 w-full rounded-lg bg-[#96ff00]/20 px-4 py-2 text-white transition-all duration-300 hover:bg-[#96ff00]/40 focus:outline-none focus:ring-2 focus:ring-[#96ff00]"
+          disabled={loading}
         >
-          Submit
+          {loading ? "Sending..." : "Submit"}
         </button>
+
+        {/* Feedback messages */}
+        {success && <p className="mt-4 text-green-400">{success}</p>}
+        {error && <p className="mt-4 text-red-400">{error}</p>}
       </form>
 
       {/* Contact Information */}
