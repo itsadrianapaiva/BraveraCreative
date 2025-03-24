@@ -1,7 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 import { supabase } from "../../../../lib/supabaseClient";
-
-//For email notifications (configure later)
 import nodemailer from "nodemailer";
 
 type FormValues = {
@@ -11,39 +9,47 @@ type FormValues = {
   message: string;
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+export async function POST(request: Request) {
+  // Convert request handling
+  const formData: FormValues = await request.json();
 
-  const { name, email, telephone, message }: FormValues = req.body;
-
-  //1.Validate Input
-  if (!name || !email || !telephone || !message) {
-    return res.status(400).json({ error: "Please fill in all fields" });
+  // Validation
+  if (
+    !formData.name ||
+    !formData.email ||
+    !formData.telephone ||
+    !formData.message
+  ) {
+    return NextResponse.json(
+      { error: "Please fill in all fields" },
+      { status: 400 },
+    );
   }
   try {
-    //2.Insert data into Supabase
-    const { data, error } = await supabase
-      .from("form_submissions")
-      .insert([{ name, email, telephone, message }]);
+    const { data, error } = await supabase.from("form_submissions").insert([
+      {
+        name: formData.name,
+        email: formData.email,
+        telephone: formData.telephone,
+        message: formData.message,
+      },
+    ]);
 
     if (error) throw error;
 
-    //3.Send email notification (will configure this later)
-    await sendNotificationEmail({ name, email, telephone, message });
+    //Send email notification
+    await sendNotificationEmail(formData);
 
-    return res
-      .status(200)
-      .json({ message: "Form submitted successfully", data });
+    return NextResponse.json(
+      { message: "Form submitted successfully", data },
+      { status: 200 },
+    );
   } catch (error) {
     console.error("Error submitting form:", error);
-    return res
-      .status(500)
-      .json({ error: "Failed to submit form. Please try again later." });
+    return NextResponse.json(
+      { error: "Failed to submit form. Please try again later." },
+      { status: 500 },
+    );
   }
 }
 
