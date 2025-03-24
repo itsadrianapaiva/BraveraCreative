@@ -47,10 +47,10 @@ const Integrations: FC<IntegrationsProps> = ({ slice }) => {
         </div>
 
         {/* Logos */}
-        <div className="relative mt-20 flex flex-wrap items-center justify-center gap-10 md:flex-nowrap md:space-x-10">
+        <div className="relative mt-20 flex flex-wrap items-center justify-evenly gap-10 md:flex-nowrap">
           {/* Horizontal Line for MD+ screens */}
-          <div className="absolute left-[calc(15%-30px)] right-[55%] top-1/2 z-0 hidden h-0.5 bg-gradient-to-r from-transparent via-gray-200/60 to-transparent md:block" />
-          <div className="absolute left-[55%] right-[calc(10%-30px)] top-1/2 z-0 hidden h-0.5 bg-gradient-to-r from-transparent via-gray-200/60 to-transparent md:block" />
+          <div className="absolute left-[calc(20%-190px)] right-[55%] top-1/2 z-0 hidden h-0.5 bg-gradient-to-r from-transparent via-gray-200/60 to-transparent md:block" />
+          <div className="absolute left-[55%] right-[calc(20%-190px)] top-1/2 z-0 hidden h-0.5 bg-gradient-to-r from-transparent via-gray-200/60 to-transparent md:block" />
 
           {/* Vertical Lines for SM screens */}
           <div className="absolute -top-10 bottom-[70%] left-1/2 z-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-transparent via-gray-200/60 to-transparent md:hidden" />
@@ -71,7 +71,7 @@ const Integrations: FC<IntegrationsProps> = ({ slice }) => {
           ))}
 
           {/* Center Bravera Logo */}
-          <div className="relative z-10 mx-6 flex items-center justify-center">
+          <div className="relative z-10 flex items-center justify-center">
             <div className="absolute z-0 h-[188px] w-[183px] animate-pulse rounded-full border-2 border-gray-400 bg-gray-200/60 shadow-2xl"></div>
             <Image
               src={braveralogo}

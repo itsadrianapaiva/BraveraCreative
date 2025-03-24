@@ -19,7 +19,7 @@ export default function NavBar({ settings }: NavBarProps) {
 
   return (
     <nav aria-label="Main" className="md-:py-6 px-4 py-4 md:px-6">
-      <div className="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-white md:flex-row md:items-center lg:hidden">
+      <div className="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-white md:flex-row md:items-center">
         <div className="flex items-center justify-end">
           <button
             type="button"
@@ -46,7 +46,7 @@ export default function NavBar({ settings }: NavBarProps) {
           >
             <PrismicNextImage
               field={settings.data.logo}
-              className="md:w-300 w-48"
+              className="md:300 w-48"
             />
             <span className="sr-only">Bravera Creative Home Page</span>
           </Link>
@@ -81,7 +81,7 @@ export default function NavBar({ settings }: NavBarProps) {
               return (
                 <PrismicNextLink
                   key={item.label}
-                  className="block px-3 text-3xl first:mt-8"
+                  className="block px-3 text-2xl first:mt-12 md:text-3xl"
                   field={item.link}
                   onClick={() => setOpen(false)}
                   aria-current={
@@ -97,23 +97,39 @@ export default function NavBar({ settings }: NavBarProps) {
           </div>
         </div>
 
-        {/* Desktop Nav */}
-        <ul className="hidden">
-          {settings?.data?.navigation?.map((item) => (
-            <li key={item.label}>
-              {item.cta_button ? (
-                <ButtonLink field={item.link}>{item.label}</ButtonLink>
-              ) : (
-                <PrismicNextLink
-                  field={item.link}
-                  className="inline-flex min-h-11 items-center"
-                >
-                  {item.label}
-                </PrismicNextLink>
-              )}
-            </li>
-          ))}
-        </ul>
+        {/* Desktop Nav - Only show on secondary pages when hamburger menu is closed */}
+        {pathname !== "/" && !open && (
+          <>
+            <Link
+              href="/"
+              className="left-15 absolute top-4"
+              onClick={() => setOpen(false)}
+            >
+              <PrismicNextImage
+                field={settings.data.logo}
+                className="w-48"
+              />
+            </Link>
+            <div className="hidden items-center justify-between md:flex">
+              <ul className="flex gap-6">
+                {settings?.data?.navigation?.map((item) => (
+                  <li key={item.label}>
+                    {item.cta_button ? (
+                      <ButtonLink field={item.link}>{item.label}</ButtonLink>
+                    ) : (
+                      <PrismicNextLink
+                        field={item.link}
+                        className="inline-flex min-h-11 items-center"
+                      >
+                        {item.label}
+                      </PrismicNextLink>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
       </div>
     </nav>
   );
