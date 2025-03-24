@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Content } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
+import { asLink, Content } from "@prismicio/client";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import ButtonLink from "@/components/ButtonLink";
 import { MdMenu, MdClose } from "react-icons/md";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
 
 type NavBarProps = {
   settings: Content.SettingsDocument;
@@ -14,14 +15,12 @@ type NavBarProps = {
 
 export default function NavBar({ settings }: NavBarProps) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
   return (
     <nav aria-label="Main" className="md-:py-6 px-4 py-4 md:px-6">
       <div className="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-white md:flex-row md:items-center lg:hidden">
-        <div className="flex items-center justify-between">
-          <Link href="/">
-            <span className="sr-only">Bravera Creative Home Page</span>
-          </Link>
-
+        <div className="flex items-center justify-end">
           <button
             type="button"
             className="block p-2 text-3xl text-tertiary md:hidden"
@@ -40,6 +39,17 @@ export default function NavBar({ settings }: NavBarProps) {
             open ? "translate-x-0" : "translate-x-[100%]",
           )}
         >
+          <Link
+            href="/"
+            className="absolute left-4 top-4"
+            onClick={() => setOpen(false)}
+          >
+            <PrismicNextImage
+              field={settings.data.logo}
+              className="md:w-300 w-48"
+            />
+            <span className="sr-only">Bravera Creative Home Page</span>
+          </Link>
           <button
             type="button"
             className="fixed right-4 top-6 mb-4 block p-2 text-3xl text-primary md:hidden"
@@ -49,10 +59,46 @@ export default function NavBar({ settings }: NavBarProps) {
             <MdClose />
             <span className="sr-only">Close Menu</span>
           </button>
+
+          <div className="grid justify-items-end gap-8">
+            {settings.data.navigation.map((item) => {
+              if (item.cta_button) {
+                return (
+                  <ButtonLink
+                    key={item.label}
+                    field={item.link}
+                    onClick={() => setOpen(false)}
+                    aria-current={
+                      pathname.includes(asLink(item.link) as string)
+                        ? "page"
+                        : undefined
+                    }
+                  >
+                    {item.label}
+                  </ButtonLink>
+                );
+              }
+              return (
+                <PrismicNextLink
+                  key={item.label}
+                  className="block px-3 text-3xl first:mt-8"
+                  field={item.link}
+                  onClick={() => setOpen(false)}
+                  aria-current={
+                    pathname.includes(asLink(item.link) as string)
+                      ? "page"
+                      : undefined
+                  }
+                >
+                  {item.label}
+                </PrismicNextLink>
+              );
+            })}
+          </div>
         </div>
 
         {/* Desktop Nav */}
-        <ul className="flex gap-6">
+        <ul className="hidden">
           {settings?.data?.navigation?.map((item) => (
             <li key={item.label}>
               {item.cta_button ? (

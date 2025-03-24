@@ -9,7 +9,7 @@ type HeaderProps = {
 
 export default function Header({ settings }: HeaderProps) {
   return (
-    <header className="absolute left-0 top-0 z-10 w-full bg-transparent">
+    <header className="absolute left-0 top-0 z-[9999] w-full bg-transparent">
       <NavBar settings={settings} />
     </header>
   );
