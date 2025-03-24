@@ -105,21 +105,32 @@ export default function NavBar({ settings }: NavBarProps) {
               className="left-15 absolute top-4"
               onClick={() => setOpen(false)}
             >
-              <PrismicNextImage
-                field={settings.data.logo}
-                className="w-48"
-              />
+              <PrismicNextImage field={settings.data.logo} className="w-48" />
             </Link>
             <div className="hidden items-center justify-between md:flex">
               <ul className="flex gap-6">
                 {settings?.data?.navigation?.map((item) => (
                   <li key={item.label}>
                     {item.cta_button ? (
-                      <ButtonLink field={item.link}>{item.label}</ButtonLink>
+                      <ButtonLink
+                        field={item.link}
+                        aria-current={
+                          pathname.includes(asLink(item.link) as string)
+                            ? "page"
+                            : undefined
+                        }
+                      >
+                        {item.label}
+                      </ButtonLink>
                     ) : (
                       <PrismicNextLink
                         field={item.link}
                         className="inline-flex min-h-11 items-center"
+                        aria-current={
+                          pathname.includes(asLink(item.link) as string)
+                            ? "page"
+                            : undefined
+                        }
                       >
                         {item.label}
                       </PrismicNextLink>

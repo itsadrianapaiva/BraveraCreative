@@ -36,7 +36,7 @@ const RichText: FC<RichTextProps> = ({ slice }) => {
 
       {/* Page Content */}
       <div className="relative grid place-items-center pt-24 text-center lg:pt-32">
-        <div className="relative z-10 text-6xl font-medium text-tertiary">
+        <div className="relative z-10 text-5xl font-medium text-tertiary md:text-6xl">
           <PrismicRichText field={slice.primary.heading} />
           <p className="pt-2 text-lg text-accent">{slice.primary.subtitle}</p>
         </div>

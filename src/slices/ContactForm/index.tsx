@@ -63,9 +63,8 @@ const Contact: FC<ContactProps> = ({ slice }) => {
             <Image
               src={videocall}
               alt="Videocall"
-              className="rounded-lg object-cover md:max-w-sm lg:max-w-full"
+              className="h-auto rounded-lg object-cover md:max-w-sm lg:max-w-full"
               width={500}
-              height={300}
             />
           </div>
         </div>
