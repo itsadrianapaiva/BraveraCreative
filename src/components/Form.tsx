@@ -2,7 +2,9 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import { TiMail, TiPhoneOutline, TiTime } from "react-icons/ti";
 
 type FormValues = {
@@ -13,7 +15,15 @@ type FormValues = {
 };
 
 const Form: React.FC = () => {
-  const { register, handleSubmit, reset } = useForm<FormValues>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>({
+    shouldFocusError: false,
+  });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -69,13 +79,22 @@ const Form: React.FC = () => {
           </label>
           <input
             id="email"
-            {...register("email", { required: true })}
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Please enter a valid email address",
+              },
+            })}
             placeholder="Your Email"
             className="rounded-md border border-slate-100/20 bg-gray-600/20 p-2 text-white placeholder-gray-400 outline-none backdrop-blur-md focus:ring-2 focus:ring-gray-300"
           />
+          {errors.email && (
+            <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+          )}
         </div>
 
-        {/* Telephone */}
+        {/* Telephone With Country Code */}
         <div className="flex flex-col">
           <label
             className="mb-2 text-sm font-medium text-gray-300"
@@ -83,11 +102,66 @@ const Form: React.FC = () => {
           >
             Telephone
           </label>
-          <input
-            id="telephone"
-            {...register("telephone")}
-            placeholder="Your Telephone"
-            className="rounded-md border border-slate-100/20 bg-gray-600/20 p-2 text-white placeholder-gray-400 outline-none backdrop-blur-md focus:ring-2 focus:ring-gray-300"
+          <Controller
+            control={control}
+            name="telephone"
+            rules={{
+              required: "Phone number is required",
+              validate: (value) => {
+                // Remove non-digit characters
+                const digits = value.replace(/\D/g, "");
+                if (digits.length <= 10) {
+                  return "Phone number must be valid";
+                }
+                return true;
+              },
+            }}
+            render={({ field, fieldState: { error } }) => (
+              <>
+                <PhoneInput
+                  {...field}
+                  country={"us"} // Default country
+                  inputStyle={{
+                    width: "100%",
+                    backgroundColor: "rgba(75, 85, 99, 0.2)",
+                    color: "white",
+                    padding: "0.5rem 0.5rem 0.5rem 3rem",
+                    borderRadius: "0.375rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    outline: "none",
+                    backdropFilter: "blur(8px)",
+                    fontSize: "1rem",
+                    caretColor: "white",
+                  }}
+                  buttonStyle={{
+                    backgroundColor: "rgba(75, 85, 99, 0.2)",
+                    border: "none",
+                    borderRadius: "0.375rem 0 0 0.375rem",
+                    color: "white",
+                    cursor: "pointer",
+                    transition: "background-color 0.2s",
+                  }}
+                  dropdownStyle={{
+                    backgroundColor: "black",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    borderRadius: "0.375rem",
+                    color: "white",
+                    boxShadow: "0 4px 8px rgba(0,0,0,0.4)",
+                    overflow: "hidden",
+                  }}
+                  inputClass="focus:ring-2 focus:ring-gray-300"
+                  placeholder="Your Telephone"
+                  containerStyle={{
+                    position: "relative",
+                  }}
+                  buttonClass="hover:bg-gray-700 active:bg-gray-800 focus:outline-none"
+                  dropdownClass="hover:bg-gray-700"
+                />
+                {error && (
+                  <p className="mt-1 text-sm text-red-500">{error.message}</p>
+                )}
+              </>
+            )}
           />
         </div>
 
@@ -102,7 +176,7 @@ const Form: React.FC = () => {
           <textarea
             id="message"
             {...register("message", { required: true })}
-            placeholder="Your Message"
+            placeholder="Your Detailed Message"
             className="h-32 resize-none rounded-md border border-slate-100/20 bg-gray-600/20 p-2 text-white placeholder-gray-400 outline-none backdrop-blur-md focus:ring-2 focus:ring-gray-300"
           />
         </div>
@@ -116,8 +190,8 @@ const Form: React.FC = () => {
         </button>
 
         {/* Feedback messages */}
-        {success && <p className="mt-4 text-green-400">{success}</p>}
-        {error && <p className="mt-4 text-red-400">{error}</p>}
+        {success && <p className="text-green-400">{success}</p>}
+        {error && <p className="text-red-400">{error}</p>}
       </form>
 
       {/* Contact Information */}

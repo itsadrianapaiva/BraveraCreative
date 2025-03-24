@@ -20,7 +20,6 @@
   content: "";
 }
 
-
 .signal-line {
   --rotation: 90deg;
   @apply h-[20px] w-[1.5px] bg-gradient-to-t md:h-[1.5px] md:w-[30px] lg:w-[40px] xl:w-[50px];
@@ -32,6 +31,45 @@
     rgba(255, 255, 255, 0) 70%
   );
   background-size: 400% 400%;
+}
+
+/* Override background and text color of dropdown items */
+.react-tel-input .country-list {
+  background-color: black !important; /* Ensures dropdown background is black */
+  border-radius: 0.375rem; /* Rounded corners */
+  border: 1.5px solid rgba(255, 255, 255, 0.2); /* Match input border */
+}
+
+/* Override the hover style for country selection */
+.react-tel-input .country:hover {
+  background-color: rgb(35, 39, 44) !important; /* Tailwind: bg-gray-800 */
+  color: white !important;
+}
+
+/* Ensure the active (clicked) country button doesn't turn white */
+.react-tel-input .selected-flag {
+  background-color: rgba(75, 85, 99, 0.2) !important;
+  border-radius: 0.375rem 0 0 0.375rem !important;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* When country button is clicked, prevent white background */
+.react-tel-input .selected-flag:hover,
+.react-tel-input .selected-flag:focus,
+.react-tel-input .selected-flag:active {
+  background-color: rgba(
+    51,
+    56,
+    63,
+    0.2
+  ) !important; /* Tailwind: bg-gray-700 */
+  color: white !important;
+}
+
+/* Style the selected country in the dropdown */
+.react-tel-input .country.highlight {
+  background-color: rgb(35, 39, 44) !important; /* bg-gray-700 */
+  color: white !important;
 }
 
 @media (max-width: 767px) {
