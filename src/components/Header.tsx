@@ -1,10 +1,13 @@
+"use client";
+
 import NavBar from "@/components/NavBar";
-import { createClient } from "@/prismicio";
+import { Content } from "@prismicio/client";
 
-export default async function Header() {
-  const client = createClient();
-  const settings = await client.getSingle("settings");
+type HeaderProps = {
+  settings: Content.SettingsDocument;
+};
 
+export default function Header({ settings }: HeaderProps) {
   return (
     <header className="absolute left-0 top-0 z-10 w-full bg-transparent">
       <NavBar settings={settings} />
