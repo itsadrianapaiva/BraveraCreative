@@ -63,13 +63,13 @@ export default async function Footer() {
         {/* Legal Links and Copyright: Full width below content */}
         <div className="mt-4 flex flex-col items-center gap-2 text-sm md:col-span-5">
           <div className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
-            <Link href="/privacy" className="hover:text-primary">
+            <Link href="/legal/privacy" className="hover:text-primary">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-primary">
+            <Link href="/legal/terms" className="hover:text-primary">
               Terms of Service
             </Link>
-            <Link href="/sitemap" className="hover:text-primary">
+            <Link href="/legal/sitemap" className="hover:text-primary">
               Sitemap
             </Link>
           </div>
