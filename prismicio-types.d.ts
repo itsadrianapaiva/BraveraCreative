@@ -106,6 +106,93 @@ export type CaseStudyDocument<Lang extends string = string> =
     Lang
   >;
 
+type LegalPageDocumentDataSlicesSlice = RichTextSlice;
+
+/**
+ * Content for Legal Page documents
+ */
+interface LegalPageDocumentData {
+  /**
+   * Title field in *Legal Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: legal_page.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Content field in *Legal Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: legal_page.content
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *Legal Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: legal_page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<LegalPageDocumentDataSlicesSlice> /**
+   * Meta title field in *Legal Page*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: legal_page.meta_title
+   * - **Tab**: SEO Meta Description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */;
+  meta_title: prismic.TitleField;
+
+  /**
+   * Meta description field in *Legal Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: legal_page.meta_description
+   * - **Tab**: SEO Meta Description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  meta_description: prismic.RichTextField;
+
+  /**
+   * Meta image field in *Legal Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: legal_page.meta_image
+   * - **Tab**: SEO Meta Description
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Legal Page document from Prismic
+ *
+ * - **API ID**: `legal_page`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type LegalPageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<LegalPageDocumentData>,
+    "legal_page",
+    Lang
+  >;
+
 type PageDocumentDataSlicesSlice =
   | CallToActionSlice
   | ContactSlice
@@ -311,6 +398,7 @@ export type SettingsDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | CaseStudyDocument
+  | LegalPageDocument
   | PageDocument
   | SettingsDocument;
 
@@ -1125,6 +1213,9 @@ declare module "@prismicio/client" {
       CaseStudyDocument,
       CaseStudyDocumentData,
       CaseStudyDocumentDataSlicesSlice,
+      LegalPageDocument,
+      LegalPageDocumentData,
+      LegalPageDocumentDataSlicesSlice,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
