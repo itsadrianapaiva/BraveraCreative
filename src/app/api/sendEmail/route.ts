@@ -41,7 +41,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Error submitting form:", error);
     return NextResponse.json(
-      { message: "Something went wrong. Please try again later." },
+      { message: "Failed to submit form. Please try again later." },
       { status: 500 },
     );
   }
