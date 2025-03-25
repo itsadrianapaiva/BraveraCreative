@@ -35,7 +35,10 @@ export async function POST(request: Request) {
       },
     ]);
 
-    if (error) throw error;
+    if (error) {
+      console.error("Supabase insert error:", error);
+      throw error;
+    }
 
     //Send email notification
     await sendNotificationEmail(formData);
@@ -56,7 +59,7 @@ export async function POST(request: Request) {
 //Helper function to send email notification
 async function sendNotificationEmail(formData: FormValues) {
   const transporter = nodemailer.createTransport({
-    service: "Gmail",
+    service: "gmail",
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -70,5 +73,11 @@ async function sendNotificationEmail(formData: FormValues) {
     text: `You have a new form submission:\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.telephone}\nMessage: ${formData.message}`,
   };
 
-  await transporter.sendMail(mailOptions);
+  try {
+    await transporter.sendMail(mailOptions);
+  } catch (mailError) {
+    console.error("Nodemailer sendMail error:", mailError);
+    throw mailError;
+  }
+  
 }
