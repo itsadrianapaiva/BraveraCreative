@@ -202,7 +202,7 @@ const Form: React.FC = () => {
         </div>
         <div className="flex items-center gap-2">
           <TiPhoneOutline />
-          <p>123-4567-891</p>
+          <p>+1 (437) 448-4877</p>
         </div>
         <div className="flex items-center gap-2">
           <TiTime />
