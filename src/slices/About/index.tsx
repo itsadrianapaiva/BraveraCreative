@@ -5,6 +5,7 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import ButtonLink from "@/components/ButtonLink";
 import clsx from "clsx";
+import AnimatedContent from "./AnimatedContent";
 
 /**
  * Props for `About`.
@@ -23,17 +24,19 @@ const About: FC<AboutProps> = ({ slice }) => {
     >
       <div className="glow absolute -z-10 aspect-square w-full max-w-xl rounded-full bg-[#96ff00]/15 blur-3xl filter" />
 
-      <PrismicRichText
-        field={slice.primary.heading}
-        components={{
-          heading2: ({ children }) => (
-            <h2 className="text-balance text-center text-5xl font-medium md:text-6xl">
-              {children}
-            </h2>
-          ),
-        }}
-      />
-
+      <AnimatedContent>
+        <PrismicRichText
+          field={slice.primary.heading}
+          components={{
+            heading2: ({ children }) => (
+              <h2 className="text-balance text-center text-5xl font-medium md:text-6xl">
+                {children}
+              </h2>
+            ),
+          }}
+        />
+      </AnimatedContent>
+      
       <div className="mt-16 grid items-center gap-8 rounded-xl border border-slate-100/20 bg-gradient-to-b from-slate-500/10 to-black px-8 py-8 backdrop-blur-sm md:grid-cols-2 lg:grid-cols-3 lg:py-12">
         <div>
           <div className="mt-6 text-2xl font-normal">
