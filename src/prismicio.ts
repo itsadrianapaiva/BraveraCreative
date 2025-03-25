@@ -29,7 +29,7 @@ const routes: Route[] = [
  */
 export function createClient(config: ClientConfig = {}) {
   const client = baseCreateClient(sm.apiEndpoint || repositoryName, {
-    accessToken: process.env.PRISMIC_ACCESS_TOKEN,
+    accessToken: process.env.PRISMIC_ACCESS_TOKEN, // ← Add this line
     routes,
     fetchOptions:
       process.env.NODE_ENV === "production"
