@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { createClient } = require('@prismicio/client');
 
 const siteUrl = "https://braveracreative.netlify.app";
