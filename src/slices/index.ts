@@ -10,5 +10,6 @@ export const components = {
   contact: dynamic(() => import("./ContactForm")),
   hero: dynamic(() => import("./Hero")),
   integrations: dynamic(() => import("./Integrations")),
+  pricing: dynamic(() => import("./Pricing")),
   rich_text: dynamic(() => import("./RichText")),
 };
