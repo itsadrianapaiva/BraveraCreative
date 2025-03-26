@@ -23,7 +23,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className={dmSans.variable}>
       <body className="bg-background text-white">
-        <Header settings={settings}/>
+        <Header settings={settings} />
         <main>{children}</main>
         <Footer />
       </body>
