@@ -100,7 +100,7 @@ const CaseStudies: FC<CaseStudiesProps> = ({ slice }) => {
                 document={caseStudy}
                 className="after:absolute after:inset-0 hover:underline"
               >
-                Read <PrismicText field={caseStudy.data.company} /> case study
+                Read <PrismicText field={caseStudy.data.company} /> Case Study
               </PrismicNextLink>
             </div>
 

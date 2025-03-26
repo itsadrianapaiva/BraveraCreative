@@ -24,7 +24,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
       <div className="relative mt-24 grid place-items-center text-center md:mt-36">
         <h1 className="relative z-10 text-6xl font-medium text-tertiary">
           <PrismicText field={page.data.company} />
-          <p className="text-lg text-accent">Case Study</p>
         </h1>
         <p className="relative z-10 mb-4 mt-8 max-w-xl text-lg text-tertiary">
           <PrismicText field={page.data.description} />

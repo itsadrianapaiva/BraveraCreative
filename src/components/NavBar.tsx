@@ -8,6 +8,7 @@ import ButtonLink from "@/components/ButtonLink";
 import { MdMenu, MdClose } from "react-icons/md";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
+import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 
 type NavBarProps = {
   settings: Content.SettingsDocument;
@@ -18,12 +19,12 @@ export default function NavBar({ settings }: NavBarProps) {
   const pathname = usePathname();
 
   return (
-    <nav aria-label="Main" className="md-:py-6 px-4 py-4 md:px-6">
-      <div className="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-white md:flex-row md:items-center">
+    <nav aria-label="Main" className="px-4 py-4 md:px-6 md:py-6">
+      <div className="mx-auto flex max-w-6xl flex-col justify-between py-2 font-medium text-white lg:flex-row lg:items-center">
         <div className="flex items-center justify-end">
           <button
             type="button"
-            className="block p-2 text-3xl text-tertiary md:hidden"
+            className="block p-2 text-3xl text-tertiary lg:hidden"
             aria-expanded={open}
             onClick={() => setOpen(true)}
           >
@@ -33,39 +34,65 @@ export default function NavBar({ settings }: NavBarProps) {
         </div>
 
         {/* Mobile Nav */}
-        <div
-          className={clsx(
-            "fixed bottom-0 left-0 right-0 top-0 z-40 flex flex-col items-end gap-4 bg-[black] pr-4 pt-14 transition-transform duration-300 ease-in-out motion-reduce:transition-none md:hidden",
-            open ? "translate-x-0" : "translate-x-[100%]",
-          )}
-        >
-          <Link
-            href="/"
-            className="absolute left-4 top-4"
-            onClick={() => setOpen(false)}
-          >
-            <PrismicNextImage
-              field={settings.data.logo}
-              className="md:300 w-48"
+        <div className="pointer-events-none fixed inset-0 z-40 lg:hidden">
+          {/* Background Overlay */}
+          {open && (
+            <div
+              className="pointer-events-auto absolute inset-0 bg-black bg-opacity-60"
+              onClick={() => setOpen(false)}
             />
-            <span className="sr-only">Bravera Creative Home Page</span>
-          </Link>
-          <button
-            type="button"
-            className="fixed right-4 top-6 mb-4 block p-2 text-3xl text-primary md:hidden"
-            aria-expanded={open}
-            onClick={() => setOpen(false)}
+          )}
+          {/* Menu Panel */}
+          <div
+            className={clsx(
+              "pointer-events-auto absolute bottom-0 right-0 top-0 z-50 flex w-[70%] flex-col items-start gap-4 bg-black pr-4 pt-40 transition-transform duration-700 ease-in-out motion-reduce:transition-none",
+              open ? "translate-x-0" : "translate-x-[100%]",
+            )}
           >
-            <MdClose />
-            <span className="sr-only">Close Menu</span>
-          </button>
+            <Link
+              href="/"
+              className="absolute left-4 top-4"
+              onClick={() => setOpen(false)}
+            >
+              <PrismicNextImage
+                field={settings.data.logo}
+                className="ml-2 mt-10 w-52"
+              />
+              <span className="sr-only">Bravera Creative Home Page</span>
+            </Link>
+            <button
+              type="button"
+              className="absolute right-4 top-6 p-2 text-3xl text-primary"
+              aria-expanded={open}
+              onClick={() => setOpen(false)}
+            >
+              <MdClose />
+              <span className="sr-only">Close Menu</span>
+            </button>
 
-          <div className="grid justify-items-end gap-8">
-            {settings.data.navigation.map((item) => {
-              if (item.cta_button) {
+            <div className="ml-6 grid justify-items-start gap-8">
+              {settings.data.navigation.map((item) => {
+                if (item.cta_button) {
+                  return (
+                    <ButtonLink
+                      key={item.label}
+                      field={item.link}
+                      onClick={() => setOpen(false)}
+                      aria-current={
+                        pathname.includes(asLink(item.link) as string)
+                          ? "page"
+                          : undefined
+                      }
+                      className="ml-2 mt-2 rounded-lg p-12 text-base md:text-lg font-medium uppercase text-tertiary"
+                    >
+                      {item.label}
+                    </ButtonLink>
+                  );
+                }
                 return (
-                  <ButtonLink
+                  <PrismicNextLink
                     key={item.label}
+                    className="block px-3 text-base md:text-lg font-light uppercase text-tertiary hover:text-primary"
                     field={item.link}
                     onClick={() => setOpen(false)}
                     aria-current={
@@ -75,25 +102,34 @@ export default function NavBar({ settings }: NavBarProps) {
                     }
                   >
                     {item.label}
-                  </ButtonLink>
+                  </PrismicNextLink>
                 );
-              }
-              return (
-                <PrismicNextLink
-                  key={item.label}
-                  className="block px-3 text-2xl first:mt-12 md:text-3xl"
-                  field={item.link}
-                  onClick={() => setOpen(false)}
-                  aria-current={
-                    pathname.includes(asLink(item.link) as string)
-                      ? "page"
-                      : undefined
-                  }
-                >
-                  {item.label}
-                </PrismicNextLink>
-              );
-            })}
+              })}
+            </div>
+
+            <div className="ml-8 mt-4 flex justify-center gap-4">
+              <Link
+                href="https://www.instagram.com/braveracreative"
+                aria-label="Instagram"
+                target="_blank"
+              >
+                <FaInstagram className="h-6 w-6 text-tertiary hover:text-primary" />
+              </Link>
+              <Link
+                href="https://www.facebook.com/braveracreative"
+                aria-label="Facebook"
+                target="_blank"
+              >
+                <FaFacebookF className="h-6 w-6 text-tertiary hover:text-primary" />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/braveracreative"
+                aria-label="LinkedIn"
+                target="_blank"
+              >
+                <FaLinkedinIn className="h-6 w-6 text-tertiary hover:text-primary" />
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -105,9 +141,12 @@ export default function NavBar({ settings }: NavBarProps) {
               className="left-15 absolute top-4"
               onClick={() => setOpen(false)}
             >
-              <PrismicNextImage field={settings.data.logo} className="w-48" />
+              <PrismicNextImage
+                field={settings.data.logo}
+                className="w-48 md:w-64"
+              />
             </Link>
-            <div className="hidden items-center justify-between md:flex">
+            <div className="hidden items-center justify-between lg:flex">
               <ul className="flex gap-6">
                 {settings?.data?.navigation?.map((item) => (
                   <li key={item.label}>
