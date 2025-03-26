@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://braveracreative.netlify.app
+
+# Sitemaps
+Sitemap: https://braveracreative.netlify.app/sitemap.xml
