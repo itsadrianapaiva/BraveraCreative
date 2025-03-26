@@ -8,10 +8,11 @@ import { notFound } from "next/navigation";
 export default async function LegalPage({
   params,
 }: {
-  params: { uid: string };
+  params: Promise<{ uid: string }>;
 }) {
+  const { uid } = await params;
   const client = createClient();
-  const legalPage = await client.getByUID("legal_page", params.uid);
+  const legalPage = await client.getByUID("legal_page", uid);
 
   if (!legalPage) {
     notFound();
