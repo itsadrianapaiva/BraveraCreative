@@ -1,5 +1,4 @@
-/** @type {import('next-sitemap').IConfig} */
-import { createClient } from '@prismicio/client'; 
+const { createClient } = require('@prismicio/client');
 
 const siteUrl = "https://braveracreative.netlify.app";
 const generateRobotsTxt = true;
@@ -47,4 +46,5 @@ const config = {
   generateRobotsTxt,
   additionalPaths,
 };
-export default config;
+
+module.exports = config;
