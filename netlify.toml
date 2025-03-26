@@ -7,3 +7,8 @@
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+
+[[headers]]
+  for = "/*.xml"
+  [headers.values]
+    Content-Type = "application/xml"
