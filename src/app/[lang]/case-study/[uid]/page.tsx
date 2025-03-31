@@ -9,12 +9,16 @@ import Bounded from "@/components/Bounded";
 import { PrismicNextImage } from "@prismicio/next";
 import BackgroundVideo from "@/components/BackgroundVideo";
 
-type Params = { uid: string };
+type Params = { uid: string; lang: "en" | "pt-br" };
 
 export default async function Page({ params }: { params: Promise<Params> }) {
-  const { uid } = await params;
+  const { uid, lang } = await params;
   const client = createClient();
-  const page = await client.getByUID("case_study", uid).catch(() => notFound());
+  const finalUid = lang === "en" ? uid : `${uid}-pt-br`;
+  const prismicLang = lang === "en" ? "en-us" : "pt-br";
+  const page = await client
+    .getByUID("case_study", finalUid, { lang: prismicLang })
+    .catch(() => notFound());
 
   return (
     <Bounded as="article">
@@ -46,9 +50,13 @@ export async function generateMetadata({
 }: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const { uid } = await params;
+  const { uid, lang } = await params;
   const client = createClient();
-  const page = await client.getByUID("case_study", uid).catch(() => notFound());
+  const finalUid = lang === "en" ? uid : `${uid}-pt-br`;
+  const prismicLang = lang === "en" ? "en-us" : "pt-br";
+  const page = await client
+    .getByUID("case_study", finalUid, { lang: prismicLang })
+    .catch(() => notFound());
 
   return {
     title: `${page.data.meta_title || asText(page.data.company) + " Case Study"}`,
@@ -60,8 +68,8 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const client = createClient();
-  const pages = await client.getAllByType("case_study");
-
-  return pages.map((page) => ({ uid: page.uid }));
+  return [
+    { uid: "case-study", lang: "en" as const },
+    { uid: "case-study", lang: "pt-br" as const },
+  ];
 }

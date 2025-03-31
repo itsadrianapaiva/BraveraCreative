@@ -2,16 +2,21 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { asImageSrc } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
+
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import Bounded from "@/components/Bounded";
 
-type Params = { uid: string };
+type Params = { uid: string; lang: "en" | "pt-br" };
 
 export default async function Page({ params }: { params: Promise<Params> }) {
-  const { uid } = await params;
+  const { uid, lang } = await params;
   const client = createClient();
-  const page = await client.getByUID("page", uid).catch(() => notFound());
+  const finalUid = lang === "en" ? uid : `${uid}-pt-br`;
+  const prismicLang = lang === "en" ? "en-us" : "pt-br";
+  const page = await client
+    .getByUID("page", finalUid, { lang: prismicLang })
+    .catch(() => notFound());
 
   return (
     <Bounded as="article">
@@ -27,9 +32,13 @@ export async function generateMetadata({
 }: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const { uid } = await params;
+  const { uid, lang } = await params;
   const client = createClient();
-  const page = await client.getByUID("page", uid).catch(() => notFound());
+  const finalUid = lang === "en" ? uid : `${uid}-pt-br`;
+  const prismicLang = lang === "en" ? "en-us" : "pt-br";
+  const page = await client
+    .getByUID("page", finalUid, { lang: prismicLang })
+    .catch(() => notFound());
 
   return {
     title: page.data.meta_title,
