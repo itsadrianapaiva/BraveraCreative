@@ -2,21 +2,21 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { asLink, Content } from "@prismicio/client";
+import { asLink } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import ButtonLink from "@/components/ButtonLink";
 import { MdMenu, MdClose } from "react-icons/md";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import LanguageToggle from "@/components/LanguageToggle";
 
-type NavBarProps = {
-  settings: Content.SettingsDocument;
-};
-
-export default function NavBar({ settings }: NavBarProps) {
+export default function NavBar({ settings, lang }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+
+  // Check if the current page is the homepage for the language (e.g., /en, /pt-br)
+  const isHomePage = pathname === `/${lang}`;
 
   return (
     <nav aria-label="Main" className="px-4 py-4 md:px-6 md:py-6">
@@ -83,7 +83,7 @@ export default function NavBar({ settings }: NavBarProps) {
                           ? "page"
                           : undefined
                       }
-                      className="ml-2 mt-2 rounded-lg p-12 text-base md:text-lg font-medium uppercase text-tertiary"
+                      className="ml-2 mt-2 rounded-lg p-12 text-base font-medium uppercase text-tertiary md:text-lg"
                     >
                       {item.label}
                     </ButtonLink>
@@ -92,7 +92,7 @@ export default function NavBar({ settings }: NavBarProps) {
                 return (
                   <PrismicNextLink
                     key={item.label}
-                    className="block px-3 text-base md:text-lg font-light uppercase text-tertiary hover:text-primary"
+                    className="block px-3 text-base font-light uppercase text-tertiary hover:text-primary md:text-lg"
                     field={item.link}
                     onClick={() => setOpen(false)}
                     aria-current={
@@ -129,15 +129,21 @@ export default function NavBar({ settings }: NavBarProps) {
               >
                 <FaLinkedinIn className="h-6 w-6 text-tertiary hover:text-primary" />
               </Link>
+              <LanguageToggle />
             </div>
           </div>
         </div>
 
-        {/* Desktop Nav - Only show on secondary pages when hamburger menu is closed */}
-        {pathname !== "/" && !open && (
+        {/* Desktop Navigation - Only on secondary pages */}
+        {isHomePage && (
+          <div className="absolute left-4 top-4">
+            <LanguageToggle />
+          </div>
+        )}
+        {!isHomePage && !open && (
           <>
             <Link
-              href="/"
+              href={`/${lang}`}
               className="left-15 absolute top-4"
               onClick={() => setOpen(false)}
             >
@@ -148,34 +154,33 @@ export default function NavBar({ settings }: NavBarProps) {
             </Link>
             <div className="hidden items-center justify-between lg:flex">
               <ul className="flex gap-6">
-                {settings?.data?.navigation?.map((item) => (
-                  <li key={item.label}>
-                    {item.cta_button ? (
-                      <ButtonLink
-                        field={item.link}
-                        aria-current={
-                          pathname.includes(asLink(item.link) as string)
-                            ? "page"
-                            : undefined
-                        }
-                      >
-                        {item.label}
-                      </ButtonLink>
-                    ) : (
-                      <PrismicNextLink
-                        field={item.link}
-                        className="inline-flex min-h-11 items-center"
-                        aria-current={
-                          pathname.includes(asLink(item.link) as string)
-                            ? "page"
-                            : undefined
-                        }
-                      >
-                        {item.label}
-                      </PrismicNextLink>
-                    )}
-                  </li>
-                ))}
+                {settings?.data?.navigation?.map((item) => {
+                  const href = asLink(item.link) || `/${lang}`; // Resolve URL here
+                  return (
+                    <li key={item.label}>
+                      {item.cta_button ? (
+                        <ButtonLink
+                          href={href} // Pass href instead of field
+                          aria-current={
+                            pathname.includes(href) ? "page" : undefined
+                          }
+                        >
+                          {item.label}
+                        </ButtonLink>
+                      ) : (
+                        <Link
+                          href={href}
+                          className="inline-flex min-h-11 items-center"
+                          aria-current={
+                            pathname.includes(href) ? "page" : undefined
+                          }
+                        >
+                          {item.label}
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </>
