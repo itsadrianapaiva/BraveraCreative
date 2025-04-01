@@ -21,7 +21,13 @@ export default async function HomePage({
     notFound();
   }
 
-  return <SliceZone slices={home.data.slices} components={components} />;
+  return (
+    <SliceZone
+      slices={home.data.slices}
+      components={components}
+      context={{ lang }} // Pass lang to slices
+    />
+  );
 }
 
 export async function generateMetadata({
@@ -50,8 +56,5 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return [
-    { lang: "en" },
-    { lang: "pt-br" },
-  ];
+  return [{ lang: "en" }, { lang: "pt-br" }];
 }
