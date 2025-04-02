@@ -92,7 +92,7 @@ const Form: React.FC<FormProps> = ({ lang }) => {
     setSuccess(null);
 
     try {
-      await axios.post("/api/sendEmail", data);
+      await axios.post("/.netlify/functions/sendEmail", data);
       setSuccess(text[lang].success);
       reset();
     } catch (error) {

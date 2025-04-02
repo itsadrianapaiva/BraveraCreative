@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://braveracreative.netlify.app
+Host: https://braveracreative.com
 
 # Sitemaps
-Sitemap: https://braveracreative.netlify.app/sitemap.xml
+Sitemap: https://braveracreative.com/sitemap.xml

@@ -4,7 +4,7 @@
     "private": true,
     "license": "Apache-2.0",
     "author": "Adriana Paiva",
-    "homepage": "https://braveracreative.netlify.app",
+    "homepage": "https://braveracreative.com",
     "scripts": {
         "dev": "concurrently \"npm:next:dev\" \"npm:slicemachine\" --names \"next,slicemachine\" --prefix-colors blue,magenta",
         "next:dev": "next dev --turbopack",
