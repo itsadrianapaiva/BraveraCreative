@@ -17,12 +17,13 @@ const AnimatedContent = ({ slice }: { slice: Content.HeroSlice }) => {
   useGSAP(
     () => {
       if (prefersReducedMotion) {
-        gsap.set(".hero__logo, hero__heading, hero__button, hero__arrow", {
+        console.log("Prefers reduced motion detected. Setting opacity to 1.");
+        gsap.set(".hero__logo, .hero__heading, .hero__button, .hero__arrow", {
           opacity: 1,
         });
         return;
       }
-      
+
       const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
       tl.fromTo(
         ".hero__logo",

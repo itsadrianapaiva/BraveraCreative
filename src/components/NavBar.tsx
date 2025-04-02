@@ -131,7 +131,11 @@ export default function NavBar({ settings, lang }: NavBarProps) {
 
             <div className="ml-8 mt-4 flex justify-center gap-4">
               <Link
-                href="https://www.instagram.com/braveracreative"
+                href={
+                  lang === "en"
+                    ? "https://www.instagram.com/braveracreative"
+                    : "https://www.instagram.com/braveracreativebr"
+                }
                 aria-label="Instagram"
                 target="_blank"
               >

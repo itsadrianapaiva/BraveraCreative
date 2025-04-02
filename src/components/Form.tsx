@@ -54,8 +54,8 @@ const Form: React.FC<FormProps> = ({ lang }) => {
       error: "Failed to send the message. Please try again later.",
       contactInfo: {
         email: "braveracreative@gmail.com",
-        phone1: "+1 (437) 448-4877 🇺🇸",
-        phone2: "+55 (31) 98937-2580 🇧🇷",
+        phone1: "+1 (437) 448-4877",
+        phone2: "+55 (31) 98937-2580",
         hours: "Mon – Fri 9AM – 5PM",
       },
     },
@@ -79,8 +79,8 @@ const Form: React.FC<FormProps> = ({ lang }) => {
       error: "Falha ao enviar a mensagem. Tente novamente mais tarde.",
       contactInfo: {
         email: "braveracreative@gmail.com",
-        phone1: "+1 (437) 448-4877 🇺🇸",
-        phone2: "+55 (31) 98937-2580 🇧🇷",
+        phone1: "+1 (437) 448-4877",
+        phone2: "+55 (31) 98937-2580",
         hours: "Segunda – Sexta 9h – 17h",
       },
     },

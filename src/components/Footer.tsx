@@ -20,6 +20,32 @@ export default async function Footer({ settings, lang }: FooterProps) {
   });
   const currentYear = new Date().getFullYear();
 
+  // Language-specific text
+  const text = {
+    en: {
+      menu: "Menu",
+      caseStudies: "Case Studies",
+      contactUs: "Contact Us",
+      hours: "Mon – Fri 9AM – 5PM",
+      bookMeeting: "Book a Meeting",
+      copyright: `© ${currentYear} Bravera Creative. All rights reserved.`,
+      privacyPolicy: "Privacy Policy",
+      termsOfService: "Terms of Service",
+      sitemap: "Sitemap",
+    },
+    "pt-br": {
+      menu: "Menu",
+      caseStudies: "Cases",
+      contactUs: "Fale Conosco",
+      hours: "Segunda – Sexta 9h – 17h",
+      bookMeeting: "Agendar uma Reunião",
+      copyright: `© ${currentYear} Bravera Creative. Todos os direitos reservados.`,
+      privacyPolicy: "Política de Privacidade",
+      termsOfService: "Termos de Serviço",
+      sitemap: "Mapa do Site",
+    },
+  };
+
   return (
     <footer className="border-t border-slate-100/20 px-8 py-7 text-tertiary">
       <div className="mx-auto max-w-6xl">
@@ -33,11 +59,13 @@ export default async function Footer({ settings, lang }: FooterProps) {
             </Link>
           </div>
           <div className="mb-8 text-left font-light">
-            <h3 className="mb-3 text-base font-medium uppercase">Menu</h3>
+            <h3 className="mb-3 text-base font-medium uppercase">
+              {text[lang].menu}
+            </h3>
             <nav aria-label="Footer Navigation">
               <ul className="flex flex-col gap-1">
                 {settings.data.navigation.map((item) => {
-                  const href = asLink(item.link) || `/${lang}`; // Use asLink directly, no extra /lang
+                  const href = asLink(item.link) || `/${lang}`;
                   return (
                     <li key={item.label}>
                       <Link
@@ -54,7 +82,7 @@ export default async function Footer({ settings, lang }: FooterProps) {
           </div>
           <div className="mb-8 text-left font-light">
             <h3 className="mb-3 text-base font-medium uppercase">
-              Case Studies
+              {text[lang].caseStudies}
             </h3>
             <ul className="flex flex-col gap-3">
               {caseStudies.map((caseStudy) => (
@@ -70,7 +98,9 @@ export default async function Footer({ settings, lang }: FooterProps) {
             </ul>
           </div>
           <div className="mb-8 text-left font-light">
-            <h3 className="mb-3 text-base font-medium uppercase">Contact Us</h3>
+            <h3 className="mb-3 text-base font-medium uppercase">
+              {text[lang].contactUs}
+            </h3>
             <ul className="flex flex-col gap-3">
               <li>
                 <a href="tel:+14374484877" className="hover:text-primary">
@@ -91,7 +121,7 @@ export default async function Footer({ settings, lang }: FooterProps) {
                 </a>
               </li>
               <li>
-                <span>Mon – Fri 9AM – 5PM</span>
+                <span>{text[lang].hours}</span>
               </li>
               <li>
                 <a
@@ -100,39 +130,41 @@ export default async function Footer({ settings, lang }: FooterProps) {
                   rel="noopener noreferrer"
                   className="hover:text-primary"
                 >
-                  Book a Meeting
+                  {text[lang].bookMeeting}
                 </a>
               </li>
             </ul>
           </div>
         </div>
         <div className="mt-6 flex flex-col-reverse items-start gap-4 border-t border-slate-100/20 pt-6 text-sm md:flex-row md:items-center md:justify-between">
-          <p className="text-white/30">
-            © {currentYear} Bravera Creative. All rights reserved.
-          </p>
+          <p className="text-white/30">{text[lang].copyright}</p>
           <div className="flex flex-row items-start justify-evenly gap-4 md:items-center md:gap-4">
             <Link
               href={`/${lang}/legal/privacy`}
               className="text-white/30 hover:text-primary"
             >
-              Privacy Policy
+              {text[lang].privacyPolicy}
             </Link>
             <Link
               href={`/${lang}/legal/terms`}
               className="text-white/30 hover:text-primary"
             >
-              Terms of Service
+              {text[lang].termsOfService}
             </Link>
             <Link
               href="/sitemap.xml"
               className="text-white/30 hover:text-primary"
             >
-              Sitemap
+              {text[lang].sitemap}
             </Link>
           </div>
           <div className="flex justify-start gap-4 md:justify-end">
             <Link
-              href="https://www.instagram.com/braveracreative"
+              href={
+                lang === "en"
+                  ? "https://www.instagram.com/braveracreative"
+                  : "https://www.instagram.com/braveracreativebr"
+              }
               aria-label="Instagram"
               target="_blank"
             >
