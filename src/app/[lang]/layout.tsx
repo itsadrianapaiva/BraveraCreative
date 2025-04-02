@@ -29,29 +29,27 @@ export default async function RootLayout({
   return (
     <html lang={lang} className={dmSans.variable}>
       <head>
-        {/* Google Tag Manager */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-JEJ61MH7WR"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
+        {/* Google Tag Manager - Script */}
+        <Script id="gtm-head" strategy="afterInteractive">
           {`
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-JEJ61MH7WR');
-    `}
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-W3ML5XHK');
+          `}
         </Script>
-
-        {/* Google Site Verification */}
-        <meta
-          name="google-site-verification"
-          content="H6X1Yv-uCMCu9dE64L5hGlLoUBrxD7CX-XI3q8Y-_Z8"
-        />
       </head>
       <body className="bg-background text-white">
+        {/* Google Tag Manager - NoScript */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-W3ML5XHK"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          ></iframe>
+        </noscript>
         <Header settings={settings} lang={lang} />
         <main>{children}</main>
         <Footer settings={settings} lang={lang} />
