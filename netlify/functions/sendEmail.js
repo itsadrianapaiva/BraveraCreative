@@ -1,18 +1,40 @@
-const nodemailer = require("nodemailer");
-const { createClient } = require("@supabase/supabase-js");
+import nodemailer from "nodemailer";
+import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_KEY,
-);
+
+console.log("Function started");
 
 exports.handler = async (event) => {
+  console.log("Event received:", event);
+
   if (event.httpMethod !== "POST") {
+    console.log("Method not allowed");
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  const { name, email, telephone, message } = JSON.parse(event.body);
+  let data;
+  try {
+    data = JSON.parse(event.body);
+    console.log("Parsed data:", data);
+  } catch (error) {
+    console.error("Failed to parse body:", error);
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: "Invalid request body" }),
+    };
+  }
 
+  const { name, email, telephone, message } = data;
+
+  // Initialize Supabase
+  console.log("Initializing Supabase");
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
+
+  // Save to Supabase
+  console.log("Saving to Supabase");
   const { error: supabaseError } = await supabase
     .from("form_submissions")
     .insert([{ name, email, telephone, message }]);
@@ -20,10 +42,12 @@ exports.handler = async (event) => {
     console.error("Supabase error:", supabaseError);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: "Failed to save form submission." }),
+      body: JSON.stringify({ message: "Failed to save form submission", error: supabaseError.message }),
     };
   }
 
+  // Send email
+  console.log("Setting up Nodemailer");
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -32,6 +56,7 @@ exports.handler = async (event) => {
     },
   });
 
+  console.log("Sending email");
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
     to: "braveracreative@gmail.com",
@@ -39,6 +64,7 @@ exports.handler = async (event) => {
     text: `Name: ${name}\nEmail: ${email}\nTelephone: ${telephone}\nMessage: ${message}`,
   });
 
+  console.log("Function completed successfully");
   return {
     statusCode: 200,
     body: JSON.stringify({ message: "Form submitted successfully" }),
