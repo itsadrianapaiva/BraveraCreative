@@ -60,7 +60,7 @@ const Form: React.FC<FormProps> = ({ lang }) => {
       },
     },
     "pt-br": {
-      title: "Mal Podemos Esperar para Ouvir de Você!",
+      title: "Mal Podemos Esperar Para Ouvir de Você!",
       labels: {
         name: "Nome",
         email: "E-mail",
