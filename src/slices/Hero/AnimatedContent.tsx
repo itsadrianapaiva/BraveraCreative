@@ -16,8 +16,20 @@ const AnimatedContent = ({ slice }: { slice: Content.HeroSlice }) => {
 
   useGSAP(
     () => {
+      console.log("Prefers Reduced Motion:", prefersReducedMotion);
+      // Add this temporary debug element
+      const debugEl = document.createElement("div");
+      debugEl.style.position = "fixed";
+      debugEl.style.top = "10px";
+      debugEl.style.left = "10px";
+      debugEl.style.color = "white";
+      debugEl.style.background = "black";
+      debugEl.style.padding = "5px";
+      debugEl.style.zIndex = "9999";
+      debugEl.textContent = `Reduced Motion: ${prefersReducedMotion}`;
+      document.body.appendChild(debugEl);
+
       if (prefersReducedMotion) {
-        console.log("Prefers reduced motion detected. Setting opacity to 1.");
         gsap.set(".hero__logo, .hero__heading, .hero__button, .hero__arrow", {
           opacity: 1,
         });
