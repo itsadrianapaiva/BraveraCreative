@@ -14,7 +14,11 @@ type FormValues = {
   message: string;
 };
 
-const Form: React.FC = () => {
+interface FormProps {
+  lang: "en" | "pt-br";
+}
+
+const Form: React.FC<FormProps> = ({ lang }) => {
   const {
     register,
     handleSubmit,
@@ -28,19 +32,72 @@ const Form: React.FC = () => {
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // Language-specific text
+  const text = {
+    en: {
+      title: "We Can't Wait to Hear From You!",
+      labels: {
+        name: "Name",
+        email: "Email",
+        telephone: "Telephone",
+        message: "Message",
+      },
+      placeholders: {
+        name: "Your Name",
+        email: "Your Email",
+        telephone: "Your Telephone",
+        message: "Your Detailed Message",
+      },
+      submit: "Submit",
+      sending: "Sending...",
+      success: "Message sent successfully! We'll be in touch soon.",
+      error: "Failed to send the message. Please try again later.",
+      contactInfo: {
+        email: "braveracreative@gmail.com",
+        phone1: "+1 (437) 448-4877 🇺🇸",
+        phone2: "+55 (31) 98937-2580 🇧🇷",
+        hours: "Mon – Fri 9AM – 5PM",
+      },
+    },
+    "pt-br": {
+      title: "Mal Podemos Esperar para Ouvir de Você!",
+      labels: {
+        name: "Nome",
+        email: "E-mail",
+        telephone: "Telefone",
+        message: "Mensagem",
+      },
+      placeholders: {
+        name: "Seu Nome",
+        email: "Seu E-mail",
+        telephone: "Seu Telefone",
+        message: "Sua Mensagem Detalhada",
+      },
+      submit: "Enviar",
+      sending: "Enviando...",
+      success: "Mensagem enviada com sucesso! Entraremos em contato em breve.",
+      error: "Falha ao enviar a mensagem. Tente novamente mais tarde.",
+      contactInfo: {
+        email: "braveracreative@gmail.com",
+        phone1: "+1 (437) 448-4877 🇺🇸",
+        phone2: "+55 (31) 98937-2580 🇧🇷",
+        hours: "Segunda – Sexta 9h – 17h",
+      },
+    },
+  };
+
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setLoading(true);
     setError(null);
     setSuccess(null);
 
     try {
-      //Sending form data to the /api/sendEmail endpoint
       await axios.post("/api/sendEmail", data);
-      setSuccess("Message sent successfully! We'll be in touch soon.");
+      setSuccess(text[lang].success);
       reset();
     } catch (error) {
       console.error("Error sending message:", error);
-      setError("Failed to send the message. Please try again later.");
+      setError(text[lang].error);
     } finally {
       setLoading(false);
     }
@@ -49,7 +106,7 @@ const Form: React.FC = () => {
   return (
     <div className="relative mx-auto mb-24 max-w-2xl sm:mx-0 md:mx-8 md:mt-16 lg:my-auto">
       <h2 className="mb-6 text-3xl font-semibold text-tertiary">
-        We Can&apos;t Wait to Hear From You!
+        {text[lang].title}
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -59,12 +116,12 @@ const Form: React.FC = () => {
             className="mb-2 text-sm font-medium text-gray-300"
             htmlFor="name"
           >
-            Name
+            {text[lang].labels.name}
           </label>
           <input
             id="name"
             {...register("name", { required: true })}
-            placeholder="Your Name"
+            placeholder={text[lang].placeholders.name}
             className="rounded-md border border-slate-100/20 bg-gray-600/20 p-2 text-white placeholder-gray-400 outline-none backdrop-blur-md focus:ring-2 focus:ring-gray-300"
           />
         </div>
@@ -75,18 +132,22 @@ const Form: React.FC = () => {
             className="mb-2 text-sm font-medium text-gray-300"
             htmlFor="email"
           >
-            Email
+            {text[lang].labels.email}
           </label>
           <input
             id="email"
             {...register("email", {
-              required: "Email is required",
+              required:
+                lang === "en" ? "Email is required" : "E-mail é obrigatório",
               pattern: {
                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Please enter a valid email address",
+                message:
+                  lang === "en"
+                    ? "Please enter a valid email address"
+                    : "Por favor, insira um e-mail válido",
               },
             })}
-            placeholder="Your Email"
+            placeholder={text[lang].placeholders.email}
             className="rounded-md border border-slate-100/20 bg-gray-600/20 p-2 text-white placeholder-gray-400 outline-none backdrop-blur-md focus:ring-2 focus:ring-gray-300"
           />
           {errors.email && (
@@ -94,24 +155,28 @@ const Form: React.FC = () => {
           )}
         </div>
 
-        {/* Telephone With Country Code */}
+        {/* Telephone */}
         <div className="flex flex-col">
           <label
             className="mb-2 text-sm font-medium text-gray-300"
             htmlFor="telephone"
           >
-            Telephone
+            {text[lang].labels.telephone}
           </label>
           <Controller
             control={control}
             name="telephone"
             rules={{
-              required: "Phone number is required",
+              required:
+                lang === "en"
+                  ? "Phone number is required"
+                  : "Número de telefone é obrigatório",
               validate: (value) => {
-                // Remove non-digit characters
                 const digits = value.replace(/\D/g, "");
                 if (digits.length <= 10) {
-                  return "Phone number must be valid";
+                  return lang === "en"
+                    ? "Phone number must be valid"
+                    : "Número de telefone deve ser válido";
                 }
                 return true;
               },
@@ -120,7 +185,7 @@ const Form: React.FC = () => {
               <>
                 <PhoneInput
                   {...field}
-                  country={"us"} // Default country
+                  country={lang === "pt-br" ? "br" : "us"}
                   inputStyle={{
                     width: "100%",
                     backgroundColor: "rgba(75, 85, 99, 0.2)",
@@ -150,10 +215,8 @@ const Form: React.FC = () => {
                     overflow: "hidden",
                   }}
                   inputClass="focus:ring-2 focus:ring-gray-300"
-                  placeholder="Your Telephone"
-                  containerStyle={{
-                    position: "relative",
-                  }}
+                  placeholder={text[lang].placeholders.telephone}
+                  containerStyle={{ position: "relative" }}
                   buttonClass="hover:bg-gray-700 active:bg-gray-800 focus:outline-none"
                   dropdownClass="hover:bg-gray-700"
                 />
@@ -171,12 +234,12 @@ const Form: React.FC = () => {
             className="mb-2 text-sm font-medium text-gray-300"
             htmlFor="message"
           >
-            Message
+            {text[lang].labels.message}
           </label>
           <textarea
             id="message"
             {...register("message", { required: true })}
-            placeholder="Your Detailed Message"
+            placeholder={text[lang].placeholders.message}
             className="h-32 resize-none rounded-md border border-slate-100/20 bg-gray-600/20 p-2 text-white placeholder-gray-400 outline-none backdrop-blur-md focus:ring-2 focus:ring-gray-300"
           />
         </div>
@@ -186,7 +249,7 @@ const Form: React.FC = () => {
           className="mt-4 w-full rounded-lg bg-[#96ff00]/20 px-4 py-2 text-white transition-all duration-300 hover:bg-[#96ff00]/40 focus:outline-none focus:ring-2 focus:ring-[#96ff00]"
           disabled={loading}
         >
-          {loading ? "Sending..." : "Submit"}
+          {loading ? text[lang].sending : text[lang].submit}
         </button>
 
         {/* Feedback messages */}
@@ -198,16 +261,16 @@ const Form: React.FC = () => {
       <div className="mt-8 flex flex-col items-start space-y-4 text-gray-400">
         <div className="flex items-center gap-2">
           <TiMail />
-          <p>braveracreative@gmail.com</p>
+          <p>{text[lang].contactInfo.email}</p>
         </div>
         <div className="flex items-center gap-2">
           <TiPhoneOutline />
-          <p>+1 (437) 448-4877 🇺🇸</p>
-          <p>| +55 (31) 98937-2580 🇧🇷</p>
+          <p>{text[lang].contactInfo.phone1}</p>
+          <p>| {text[lang].contactInfo.phone2}</p>
         </div>
         <div className="flex items-center gap-2">
           <TiTime />
-          <p>Mon – Fri 9AM – 5PM</p>
+          <p>{text[lang].contactInfo.hours}</p>
         </div>
       </div>
     </div>
