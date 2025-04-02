@@ -202,7 +202,8 @@ const Form: React.FC = () => {
         </div>
         <div className="flex items-center gap-2">
           <TiPhoneOutline />
-          <p>+1 (437) 448-4877</p>
+          <p>+1 (437) 448-4877 🇺🇸</p>
+          <p>| +55 (31) 98937-2580 🇧🇷</p>
         </div>
         <div className="flex items-center gap-2">
           <TiTime />
