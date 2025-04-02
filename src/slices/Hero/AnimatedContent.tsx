@@ -16,8 +16,6 @@ const AnimatedContent = ({ slice }: { slice: Content.HeroSlice }) => {
 
   useGSAP(
     () => {
-      console.log("Prefers Reduced Motion:", prefersReducedMotion);
-
       if (prefersReducedMotion) {
         gsap.set(".hero__logo, .hero__heading, .hero__button, .hero__arrow", {
           opacity: 1,
