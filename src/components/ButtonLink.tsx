@@ -1,13 +1,14 @@
 import Link from "next/link";
-import { asLink } from "@prismicio/client";
+import { asLink, LinkField } from "@prismicio/client"; 
 import clsx from "clsx";
+import { ReactNode } from "react";
 
 type ButtonLinkProps = {
-  href?: string; // Add href for direct URL passing
-  field?: any; // Keep field for compatibility, but prefer href
+  href?: string; 
+  field?: LinkField; 
   className?: string;
-  children: React.ReactNode;
-  [key: string]: any; // For other props like onClick
+  children: ReactNode;
+  [key: string]: unknown; 
 };
 
 export default function ButtonLink({
@@ -17,7 +18,7 @@ export default function ButtonLink({
   children,
   ...restProps
 }: ButtonLinkProps) {
-  const resolvedHref = href || asLink(field) || "/"; // Use href if provided, else resolve field
+  const resolvedHref = href || asLink(field) || "/"; 
 
   return (
     <Link

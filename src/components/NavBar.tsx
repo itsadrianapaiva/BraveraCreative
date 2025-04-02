@@ -1,22 +1,47 @@
-"use-client";
+"use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { asLink } from "@prismicio/client";
+import { asLink, LinkField, ImageField } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import ButtonLink from "@/components/ButtonLink";
 import { MdMenu, MdClose } from "react-icons/md";
 import clsx from "clsx";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import LanguageToggle from "@/components/LanguageToggle";
 
-export default function NavBar({ settings, lang }) {
+interface NavItem {
+  label: string | null;
+  link: LinkField;
+  cta_button: boolean;
+}
+
+interface NavBarProps {
+  settings: {
+    data: {
+      logo: ImageField;
+      navigation: NavItem[];
+    };
+  };
+  lang: "en" | "pt-br";
+}
+
+export default function NavBar({ settings, lang }: NavBarProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-
-  // Check if the current page is the homepage for the language (e.g., /en, /pt-br)
+  const router = useRouter();
   const isHomePage = pathname === `/${lang}`;
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem("preferredLanguage");
+    const browserLang = navigator.language.startsWith("pt") ? "pt-br" : "en";
+    const redirectLang =
+      storedLang === "en" || storedLang === "pt-br" ? storedLang : browserLang;
+    if (lang !== redirectLang) {
+      router.replace(`/${redirectLang}`);
+    }
+  }, [lang, router]);
 
   return (
     <nav aria-label="Main" className="px-4 py-4 md:px-6 md:py-6">
@@ -33,16 +58,13 @@ export default function NavBar({ settings, lang }) {
           </button>
         </div>
 
-        {/* Mobile Nav */}
         <div className="pointer-events-none fixed inset-0 z-40 lg:hidden">
-          {/* Background Overlay */}
           {open && (
             <div
               className="pointer-events-auto absolute inset-0 bg-black bg-opacity-60"
               onClick={() => setOpen(false)}
             />
           )}
-          {/* Menu Panel */}
           <div
             className={clsx(
               "pointer-events-auto absolute bottom-0 right-0 top-0 z-50 flex w-[70%] flex-col items-start gap-4 bg-black pr-4 pt-40 transition-transform duration-700 ease-in-out motion-reduce:transition-none",
@@ -75,7 +97,7 @@ export default function NavBar({ settings, lang }) {
                 if (item.cta_button) {
                   return (
                     <ButtonLink
-                      key={item.label}
+                      key={item.label || "cta"}
                       field={item.link}
                       onClick={() => setOpen(false)}
                       aria-current={
@@ -85,13 +107,13 @@ export default function NavBar({ settings, lang }) {
                       }
                       className="ml-2 mt-2 rounded-lg p-12 text-base font-medium uppercase text-tertiary md:text-lg"
                     >
-                      {item.label}
+                      {item.label || "CTA"}
                     </ButtonLink>
                   );
                 }
                 return (
                   <PrismicNextLink
-                    key={item.label}
+                    key={item.label || "link"}
                     className="block px-3 text-base font-light uppercase text-tertiary hover:text-primary md:text-lg"
                     field={item.link}
                     onClick={() => setOpen(false)}
@@ -101,7 +123,7 @@ export default function NavBar({ settings, lang }) {
                         : undefined
                     }
                   >
-                    {item.label}
+                    {item.label || "Link"}
                   </PrismicNextLink>
                 );
               })}
@@ -134,7 +156,6 @@ export default function NavBar({ settings, lang }) {
           </div>
         </div>
 
-        {/* Desktop Navigation - Only on secondary pages */}
         {isHomePage && (
           <div className="absolute left-4 top-4">
             <LanguageToggle />
@@ -154,18 +175,18 @@ export default function NavBar({ settings, lang }) {
             </Link>
             <div className="hidden items-center justify-between lg:flex">
               <ul className="flex gap-6">
-                {settings?.data?.navigation?.map((item) => {
-                  const href = asLink(item.link) || `/${lang}`; // Resolve URL here
+                {settings.data.navigation.map((item) => {
+                  const href = asLink(item.link) || `/${lang}`;
                   return (
-                    <li key={item.label}>
+                    <li key={item.label || "nav"}>
                       {item.cta_button ? (
                         <ButtonLink
-                          href={href} // Pass href instead of field
+                          href={href}
                           aria-current={
                             pathname.includes(href) ? "page" : undefined
                           }
                         >
-                          {item.label}
+                          {item.label || "CTA"}
                         </ButtonLink>
                       ) : (
                         <Link
@@ -175,7 +196,7 @@ export default function NavBar({ settings, lang }) {
                             pathname.includes(href) ? "page" : undefined
                           }
                         >
-                          {item.label}
+                          {item.label || "Link"}
                         </Link>
                       )}
                     </li>

@@ -8,7 +8,6 @@ const LanguageToggle = () => {
   const pathname = usePathname();
   const [language, setLanguage] = useState<string>("en");
 
-  // Set initial language based on localStorage or URL
   useEffect(() => {
     const storedLang = localStorage.getItem("preferredLanguage");
     if (storedLang === "en" || storedLang === "pt-br") {
@@ -16,21 +15,18 @@ const LanguageToggle = () => {
     } else if (pathname.startsWith("/pt-br")) {
       setLanguage("pt-br");
     } else {
-      setLanguage("en"); // Default to "en" if no /pt-br prefix
+      setLanguage("en");
     }
   }, [pathname]);
 
-  // Toggle language and update URL
   const toggleLanguage = () => {
     const newLang = language === "en" ? "pt-br" : "en";
     setLanguage(newLang);
     localStorage.setItem("preferredLanguage", newLang);
+    document.cookie = `preferredLanguage=${newLang}; path=/; max-age=31536000`; // 1 year expiry
 
-    // Replace the language segment in the path
     const currentLangPrefix = pathname.startsWith("/pt-br") ? "/pt-br" : "/en";
     const newPath = pathname.replace(currentLangPrefix, `/${newLang}`);
-
-    // If no language prefix exists (e.g., "/"), prepend the new language
     if (!pathname.startsWith("/en") && !pathname.startsWith("/pt-br")) {
       const cleanPath = pathname === "/" ? "" : pathname;
       router.push(`/${newLang}${cleanPath}`);
@@ -42,7 +38,7 @@ const LanguageToggle = () => {
   return (
     <button
       onClick={toggleLanguage}
-      className="relative inline-flex h-8 w-28 items-center justify-between rounded-full bg-gray-600/40 p-1 transition-all"
+      className="relative inline-flex h-8 w-28 items-center justify-between rounded-full bg-white/15 p-1 transition-all"
     >
       <span
         className={`absolute left-1 top-1 h-6 w-12 rounded-full bg-[#96ff00]/30 transition-transform duration-200 ${

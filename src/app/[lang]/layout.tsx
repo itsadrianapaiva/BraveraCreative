@@ -1,7 +1,7 @@
 import { DM_Sans } from "next/font/google";
 import { PrismicPreview } from "@prismicio/next";
 import { repositoryName, createClient } from "@/prismicio";
-import "../globals.css"; // Adjust path
+import "../globals.css"; 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ReactNode } from "react";

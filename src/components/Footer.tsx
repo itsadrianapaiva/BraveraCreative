@@ -78,6 +78,11 @@ export default async function Footer({ settings, lang }: FooterProps) {
                 </a>
               </li>
               <li>
+                <a href="tel:+55313989372580" className="hover:text-primary">
+                  +55 (31) 98937-2580
+                </a>
+              </li>
+              <li>
                 <a
                   href="mailto:braveracreative@gmail.com"
                   className="hover:text-primary"
