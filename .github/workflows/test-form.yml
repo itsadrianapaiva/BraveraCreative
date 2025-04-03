@@ -1,0 +1,43 @@
+name: Test Contact Form
+
+# When to run the workflow
+on:
+  schedule:
+    - cron: '0 9 * * 1' # Runs every Monday at 9:00 AM UTC
+  workflow_dispatch: # Allows manual triggering from GitHub UI
+
+jobs:
+  test-form:
+    runs-on: ubuntu-latest # The virtual machine type GitHub provides
+
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22' # Use the Node.js version your project supports
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run the test script
+      - name: Run form test
+        run: node scripts/test-form.js
+
+      # Step 5: Notify on failure (using GitHub Issues)
+      - name: Create issue on failure
+        if: failure() # Only runs if a previous step fails
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Contact Form Test Failed',
+              body: 'The automated test for the contact form failed on ${{ github.sha }}. Please check the logs for details.'
+            })
