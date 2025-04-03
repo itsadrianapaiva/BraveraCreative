@@ -1,39 +1,59 @@
-import axios from "axios";
+/* eslint-disable @typescript-eslint/no-require-imports */
+const axios = require("axios");
+const { createClient } = require("@supabase/supabase-js");
 
-// Dummy form data to simulate a submission
+// Dummy form data with a unique identifier
+const uniqueMessage = `Test message from automation - ${Date.now()}`; // Unique timestamp
 const formData = {
   name: "Test User",
   email: "test@example.com",
-  telephone: "+14374484877", // A valid phone number format
-  message: "This is a test message from the automation script.",
+  telephone: "+14374484877",
+  message: uniqueMessage,
 };
 
-// Function to test the form submission
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+);
+
 async function testFormSubmission() {
   try {
-    // Send POST request to the Netlify function
+    // Step 1: Send POST request to the Netlify function
     const response = await axios.post(
       "https://braveracreative.com/.netlify/functions/sendEmail",
       formData,
       {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       },
     );
 
-    // Check if the response status is 200 (success)
-    if (response.status === 200) {
-      console.log("Form submission successful:", response.data);
-      process.exit(0); // Exit with success code
-    } else {
+    if (response.status !== 200) {
       console.error("Unexpected status code:", response.status);
-      process.exit(1); // Exit with failure code
+      process.exit(1);
     }
+    console.log("Form submission sent successfully:", response.data);
+
+    // Step 2: Verify the data in Supabase
+    const { data, error } = await supabase
+      .from("form_submissions")
+      .select("*")
+      .eq("message", uniqueMessage) // Match the unique message
+      .single(); // Expect one row
+
+    if (error || !data) {
+      console.error(
+        "Supabase verification failed:",
+        error?.message || "No data found",
+      );
+      process.exit(1);
+    }
+
+    console.log("Supabase verification successful:", data);
+    process.exit(0); // All checks passed
   } catch (error) {
-    // Log any errors (e.g., network issues, server errors)
-    console.error("Form submission failed:", error.message);
-    process.exit(1); // Exit with failure code
+    console.error("Test failed:", error.message);
+    process.exit(1);
   }
 }
 
