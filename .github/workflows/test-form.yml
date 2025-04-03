@@ -1,43 +1,44 @@
 name: Test Contact Form
 
-# When to run the workflow
 on:
   schedule:
-    - cron: '0 9 * * 1' # Runs every Monday at 9:00 AM UTC
-  workflow_dispatch: # Allows manual triggering from GitHub UI
+    - cron: "0 9 * * 1" # Every Monday at 9:00 AM UTC
+  workflow_dispatch:
 
 jobs:
   test-form:
-    runs-on: ubuntu-latest # The virtual machine type GitHub provides
+    runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # Use the Node.js version your project supports
+          node-version: "20"
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Run the test script
       - name: Run form test
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
         run: node scripts/test-form.js
 
-      # Step 5: Notify on failure (using GitHub Issues)
-      - name: Create issue on failure
-        if: failure() # Only runs if a previous step fails
-        uses: actions/github-script@v7
+      - name: Send email on failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
         with:
-          script: |
-            github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: 'Contact Form Test Failed',
-              body: 'The automated test for the contact form failed on ${{ github.sha }}. Please check the logs for details.'
-            })
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USER }}
+          password: ${{ secrets.EMAIL_PASS }}
+          subject: "Contact Form Test Failed"
+          to: braveracreative@gmail.com
+          from: ${{ secrets.EMAIL_USER }}
+          body: |
+            The automated test for the contact form failed.
+            Check the GitHub Actions logs for details: 
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
