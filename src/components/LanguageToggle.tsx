@@ -38,26 +38,26 @@ const LanguageToggle = () => {
   return (
     <button
       onClick={toggleLanguage}
-      className="relative inline-flex h-8 w-28 items-center justify-between rounded-full bg-white/15 p-1 transition-all"
+      className="relative inline-flex h-8 w-34 items-center justify-between rounded-full bg-white/15 p-1 transition-all"
     >
       <span
-        className={`absolute left-1 top-1 h-6 w-12 rounded-full bg-[#96ff00]/30 transition-transform duration-200 ${
-          language === "pt-br" ? "translate-x-14" : "translate-x-0"
+        className={`absolute left-1 top-1 h-6 w-16 rounded-full bg-[#96ff00]/30 transition-transform duration-200 ${
+          language === "pt-br" ? "translate-x-16" : "translate-x-0"
         }`}
       ></span>
       <span
-        className={`relative flex w-12 items-center justify-center text-xs font-medium ${
+        className={`relative flex w-16 items-center justify-center text-xs font-medium ${
           language === "en" ? "text-white" : "text-gray-300"
         }`}
       >
-        🇺🇸 US
+        English
       </span>
       <span
-        className={`relative flex w-12 items-center justify-center text-xs font-medium ${
+        className={`relative flex w-16 items-center justify-center text-xs font-medium ${
           language === "pt-br" ? "text-white" : "text-gray-300"
         }`}
       >
-        BR 🇧🇷
+        Português
       </span>
     </button>
   );
